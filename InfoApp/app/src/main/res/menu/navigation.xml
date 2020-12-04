@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_news"
+        android:icon="@drawable/news"
+        android:title="@string/news"/>
+
+    <item
+        android:id="@+id/navigation_movie"
+        android:icon="@drawable/movie"
+        android:title="@string/movie"/>
+
+    <item
+        android:id="@+id/navigation_weather"
+        android:icon="@drawable/weather"
+        android:title="@string/weather"/>
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/person"
+        android:title="@string/person"/>
+
+</menu>
