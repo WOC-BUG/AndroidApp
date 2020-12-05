@@ -5,4 +5,6 @@
     <string name="news">新闻</string>
     <string name="weather">天气</string>
     <string name="person">我的</string>
+    <string name="type">输入框框</string>
+    <string name="send">发送</string>
 </resources>
