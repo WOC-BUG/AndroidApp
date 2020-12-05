@@ -10,4 +10,9 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
+
+    <style name="star">
+        <item name="android:background">@drawable/star</item>
+        <item name="android:button">@null</item>
+    </style>
 </resources>
