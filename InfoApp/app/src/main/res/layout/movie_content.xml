@@ -22,17 +22,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_margin="10dp"
+            android:background="#535353"/>
+
         <!--  演员列表（横向）  -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/performerRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_margin="10dp"
+            android:background="#535353"/>
 
         <!--  评论区（纵向）  -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/commentRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
     </LinearLayout>
 
     <!--  输入框  -->
@@ -43,12 +57,14 @@
         android:padding="10dp"
         android:orientation="horizontal">
         <EditText
-            android:id="@+id/search_box"
+            android:id="@+id/comment_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:inputType="textMultiLine"
             android:layout_weight="1"/>
         <Button
-            android:id="@+id/accept_search"
+            android:id="@+id/accept_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="3"
