@@ -23,8 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:background="@drawable/button_style"
-            style="@style/TextStyle"/>
+            android:background="@drawable/button"
+            style="@style/TextStyle"
+            android:onClick="search"/>
     </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager
