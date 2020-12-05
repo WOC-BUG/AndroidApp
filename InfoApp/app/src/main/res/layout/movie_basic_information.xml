@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/movieBasicInfoLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -24,6 +25,7 @@
             android:id="@+id/movieTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:text="MovieTitle"
             android:textSize="30sp"
@@ -49,7 +51,7 @@
             android:layout_height="wrap_content"
             android:text="MovieInformation"
             android:layout_margin="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatCheckBox"
+            app:layout_constraintBottom_toBottomOf="@+id/checkStar"
             app:layout_constraintStart_toEndOf="@+id/moviePoster"
             app:layout_constraintTop_toBottomOf="@+id/movieType" />
 
@@ -59,23 +61,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="MovieScore"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatCheckBox"
+            app:layout_constraintBottom_toBottomOf="@+id/checkStar"
             app:layout_constraintStart_toStartOf="@+id/moviePoster"
             app:layout_constraintTop_toBottomOf="@+id/moviePoster"
             tools:ignore="MissingConstraints" />
 
         <!--  收藏选项  -->
         <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/appCompatCheckBox"
+            android:id="@+id/checkStar"
             style="@style/star"
             android:layout_width="25dp"
             android:layout_height="25dp"
             app:layout_constraintEnd_toEndOf="@+id/moviePoster"
             app:layout_constraintTop_toBottomOf="@+id/moviePoster" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_margin="10dp"
         android:background="#535353"/>
+
 </LinearLayout>
