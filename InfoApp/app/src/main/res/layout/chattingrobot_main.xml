@@ -14,7 +14,6 @@
         android:textSize="50dp"
         android:layout_gravity="center_horizontal"
         android:textStyle="bold"
-        android:textview=""
         />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -39,7 +38,9 @@
             android:id="@+id/send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/send" />
+            android:text="@string/send"
+            android:background="@drawable/button"
+            style="@style/TextStyle"/>
     </LinearLayout>
 
 </LinearLayout>
