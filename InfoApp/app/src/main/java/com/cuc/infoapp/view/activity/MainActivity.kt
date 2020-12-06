@@ -1,8 +1,7 @@
-package com.cuc.infoapp.view.Activity
+package com.cuc.infoapp.view.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import com.cuc.infoapp.R
 
 class MainActivity : AppCompatActivity() {
@@ -10,6 +9,4 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
-
-    fun search(view: View) {}
 }
