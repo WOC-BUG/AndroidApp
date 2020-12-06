@@ -1,4 +1,4 @@
-package com.cuc.infoapp.view.fragment
+package com.cuc.infoapp.view.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +16,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class HomeFragment : AppCompatActivity(), View.OnClickListener {
+class ChatActivity : AppCompatActivity(), View.OnClickListener {
 
     private val msgList = ArrayList<Msg>()
     private var adapter : MsgAdapter?= null
