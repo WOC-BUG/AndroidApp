@@ -16,7 +16,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class Home : AppCompatActivity(), View.OnClickListener {
+class HomeFragment : AppCompatActivity(), View.OnClickListener {
 
     private val msgList = ArrayList<Msg>()
     private var adapter : MsgAdapter?= null
