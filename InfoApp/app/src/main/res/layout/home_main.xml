@@ -49,4 +49,16 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/ButtonRobot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:fab_size="mini"
+        android:src="@drawable/robot">
+
+
+    </com.github.clans.fab.FloatingActionButton>
+
+
 </LinearLayout>
