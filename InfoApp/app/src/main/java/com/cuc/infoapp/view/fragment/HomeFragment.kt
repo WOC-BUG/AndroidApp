@@ -23,7 +23,7 @@ class HomeFragment : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.chattingrobot_main)
         supportActionBar?.hide()
 
         initMsg()
