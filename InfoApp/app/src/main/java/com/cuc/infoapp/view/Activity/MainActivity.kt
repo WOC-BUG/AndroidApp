@@ -1,8 +1,9 @@
-package com.cuc.infoapp
+package com.cuc.infoapp.view.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.cuc.infoapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
