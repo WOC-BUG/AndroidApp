@@ -8,42 +8,32 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.Movie
+import com.cuc.infoapp.view.adapter.MovieAdapter
+import kotlinx.android.synthetic.main.chattingrobot_main.*
 
 
 class HomeFragment : Fragment() {
-
-    override fun onCreateView(
+    private val movieList = ArrayList<Movie>()
+    override fun onCreateView(//为了返回视图
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.home_main, container, false)
+        this.initMovies()
+        val layoutManager =
+            LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false)//抄的大佬的，不知道对不对哦
+        recyclerView.layoutManager = layoutManager
+        val adapter = MovieAdapter(movieList)
+        recyclerView.adapter = adapter
+
     }
 
+    private fun initMovies() {//这里是要传回的数据们
+    }
 }
-class MovieAdapter(val movieList: List<Movie>) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val MovieImage: ImageView = view.findViewById(R.id.moviePoster)
-        val MovieTitle :TextView=view.findViewById(R.id.movieTitle)
-        val MovieType :TextView=view.findViewById(R.id.movieType)
-        val MovieInfo :TextView=view.findViewById(R.id.movieInfo)
-        val MovieScore :TextView=view.findViewById(R.id.movieScore)
-        val checkStar:AppCompatCheckBox=view.findViewById(R.id.checkStar)
-    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
-    }
-
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
-    }
-
-}
