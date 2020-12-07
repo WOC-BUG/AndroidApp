@@ -1,6 +1,7 @@
 package com.cuc.infoapp.view.activity
 
 import FragmentAdapter
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.NonNull
@@ -11,6 +12,7 @@ import com.cuc.infoapp.R
 import com.cuc.infoapp.view.fragment.MovieFragment
 import com.cuc.infoapp.view.fragment.NewsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.item_news.*
 import java.util.*
 
 
