@@ -1,48 +1,32 @@
 package com.cuc.infoapp.view.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.Movie
+import com.cuc.infoapp.view.holder.MovieVIewHolder
+import kotlinx.android.synthetic.main.item_movies.view.*
 
-class MovieAdapter(val movieList: List<Movie>) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val MovieImage: ImageView = view.findViewById(R.id.moviePoster)
-        val MovieTitle : TextView =view.findViewById(R.id.movieTitle)
-        val MovieType : TextView =view.findViewById(R.id.movieType)
-        val MovieInfo : TextView =view.findViewById(R.id.movieInfo)
-        val MovieScore : TextView =view.findViewById(R.id.movieScore)
+class MovieAdapter(private val movieList: List<Movie>) : RecyclerView.Adapter<MovieVIewHolder>(){
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieVIewHolder {
+        val view= LayoutInflater.from(parent.context).inflate(R.layout.item_movies,parent,false)
+        return MovieVIewHolder(view)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view=LayoutInflater.from(parent.context).inflate(R.layout.home_main,parent,false)
-        return ViewHolder(view)
+    override fun onBindViewHolder(holder: MovieVIewHolder, position: Int) {
+        val movie=movieList[position]
+        holder.movieItem.moviesTitle.text=movie.getTitle()
+        /*
+        图片加载方法：
+        https://blog.csdn.net/weixin_43396054/article/details/108992191
+        https://blog.csdn.net/chennai1101/article/details/103985572
+         */
+        Glide.with(holder.itemView.context).load(movie.getPoster()).error(R.drawable.movie1).into(holder.movieItem.moviesImage);
     }
 
-    override fun getItemCount() = movieList.size
-
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val MoviePosition = movieList[position]
-        //holder.MovieImage.setImageResource(MoviePosition.poster)//这里需要int,但是poster是string
-        val Imagesrc: String = MoviePosition.getCover()
-        holder.MovieTitle.setText(MoviePosition.getTitle())
-        holder.MovieInfo.setText(MoviePosition.getCountry())
-        holder.MovieInfo.setText(MoviePosition.getActors())
-        holder.MovieInfo.setText(MoviePosition.getLanguage())
-        holder.MovieScore.setText(MoviePosition.getRating())
-        holder.MovieType.setText(MoviePosition.getType())
-
-    }
+    override fun getItemCount(): Int = movieList.size
 
 }
-
-private fun TextView.setText(country: String, actors: String, language: String) {
-
-}//这是为了传很多准备的
-
-

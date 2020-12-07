@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.cuc.infoapp.R
+import com.cuc.infoapp.view.fragment.MovieFragment
 import com.cuc.infoapp.view.fragment.NewsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView=findViewById(R.id.bottomNavigationView)
         viewPager=findViewById(R.id.viewPager)
         listFragment.add(NewsFragment())    //添加新闻Fragment
+        listFragment.add(MovieFragment())    //添加视频Fragment
 
         //默认选中第一个页面
         bottomNavigationView.menu.getItem(0).isChecked = true;
@@ -62,16 +64,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(position: Int) {
-                if (menuItem != null) {
-                    //如果有已选中的item，则取消它的的选中状态
-                    menuItem.isChecked = false;
-                } else {
-                    //如果没有，则取消默认的选中状态（第一个item）
-                    bottomNavigationView.menu.getItem(0).isChecked = false;
-                }
                 //让与当前Pager相应的item变为选中状态
                 menuItem = bottomNavigationView.menu.getItem(position);
-                menuItem.isChecked = true;
             }
         }
 
