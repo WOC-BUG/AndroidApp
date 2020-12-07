@@ -1,5 +1,6 @@
 package com.cuc.infoapp.view.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,9 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.News
+import com.cuc.infoapp.view.activity.NewsActivity
 import com.cuc.infoapp.view.adapter.NewsAdapter
+import kotlinx.android.synthetic.main.item_news.*
 import kotlinx.android.synthetic.main.news_or_movies.*
 import java.util.*
 
