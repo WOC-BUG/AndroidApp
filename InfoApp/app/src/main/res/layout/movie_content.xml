@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/moviesContentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -14,7 +15,11 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/basicInformation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" >
+
+            <include layout="@layout/movie_basic_information" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--  电影简介  -->
         <TextView
