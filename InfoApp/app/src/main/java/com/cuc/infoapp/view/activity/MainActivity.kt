@@ -26,12 +26,24 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //setContentView(R.layout.movie_content)
+       // listFragment.add(MovieContentFragment())    //添加电影详情Fragment
 
         //初始化控件
         bottomNavigationView=findViewById(R.id.bottomNavigationView)
         viewPager=findViewById(R.id.viewPager)
         listFragment.add(NewsFragment())    //添加新闻Fragment
         listFragment.add(MovieFragment())    //添加视频Fragment
+
+        /* 未实现
+        //电影海报点击监听事件
+        val movieItem : FrameLayout = findViewById(R.id.moviesItemLayout)
+        movieItem.setOnClickListener {
+            fun onClick(){
+                val intent = Intent( this, MovieActivity::class.java)
+                startActivity(intent)
+            }
+        }*/
 
         //默认选中第一个页面
         bottomNavigationView.menu.getItem(0).isChecked = true;
