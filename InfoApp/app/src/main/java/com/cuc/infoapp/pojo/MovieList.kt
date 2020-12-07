@@ -1,7 +1,6 @@
 package com.cuc.infoapp.pojo
 
 class MovieList {
-
     var movies:List<Movie>?=null
 
     fun getData(): List<Movie>? {
