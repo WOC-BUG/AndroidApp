@@ -1,4 +1,4 @@
-package com.cuc.infoapp.fragment
+package com.cuc.infoapp.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
