@@ -1,6 +1,8 @@
 package com.cuc.infoapp.pojo
-
-class News {
+import java.io.Serializable
+// Serializable能够序列化对象
+// 参考文档：https://blog.csdn.net/weixin_37418246/article/details/80739882
+class News:Serializable {
     private lateinit var uniqueKey:String   //唯一标识码
     private lateinit var title:String   //标题
     private lateinit var date:String    //发布日期

@@ -1,21 +1,26 @@
 package com.cuc.infoapp.view.fragment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder
-import cn.bingoogolapple.refreshlayout.BGARefreshLayout
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.News
+import com.cuc.infoapp.view.activity.MainActivity
 import com.cuc.infoapp.view.activity.NewsActivity
 import com.cuc.infoapp.view.adapter.NewsAdapter
+import com.google.android.material.internal.ContextUtils.getActivity
 import kotlinx.android.synthetic.main.item_news.*
 import kotlinx.android.synthetic.main.news_or_movies.*
 import java.util.*
+
 
 class NewsFragment:Fragment() {
     private val dataItems: List<News> = ArrayList()
@@ -42,6 +47,8 @@ class NewsFragment:Fragment() {
 //        itemsRefresh.setRefreshViewHolder(refreshViewHolder)
 //
 //        itemsRefresh.beginRefreshing();
+
+
         return view
     }
 
@@ -60,6 +67,7 @@ class NewsFragment:Fragment() {
         val newsList=ArrayList<News>()
         for(i in 1..10){
             val news=News()
+            news.setUrl("https://blog.csdn.net/yaoyaoyao_123/article/details/85205594")
             news.setTitle("This is title $i")
             news.setAuthorName("This is Author $i")
             news.setDate("This is Date $i")

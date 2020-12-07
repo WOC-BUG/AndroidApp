@@ -1,13 +1,16 @@
 package com.cuc.infoapp.view.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.News
+import com.cuc.infoapp.view.activity.NewsActivity
 import com.cuc.infoapp.view.holder.NewsViewHolder
 import kotlinx.android.synthetic.main.item_news.view.*
 
@@ -29,8 +32,18 @@ class NewsAdapter(private val newsList: List<News>) : RecyclerView.Adapter<NewsV
         https://blog.csdn.net/chennai1101/article/details/103985572
          */
         Glide.with(holder.itemView.context).load(news.getThumbnailPicS(1)).error(R.drawable.person1).into(holder.newsItem.newsImage);
+
+        // 配置监听器
+        holder.newsItem.setOnClickListener(OnClickListener(news))
     }
 
     override fun getItemCount(): Int = newsList.size
 
+    private class OnClickListener(var news: News) : View.OnClickListener {
+        override fun onClick(v: View) {
+            val intent = Intent(v.context, NewsActivity::class.java)
+            intent.putExtra("newsItem", news)
+            v.context.startActivity(intent)
+        }
+    }
 }
