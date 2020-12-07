@@ -26,16 +26,18 @@ class MovieAdapter(val movieList: List<Movie>) : RecyclerView.Adapter<MovieAdapt
     override fun getItemCount() = movieList.size
 
 
-override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    val MoviePosition = movieList[position]
-    //holder.MovieImage.setImageResource(MoviePosition.poster)//这里需要int,但是poster是string
-    val Imagesrc: String = MoviePosition.getCover()
-    holder.MovieTitle.setText(MoviePosition.title)
-    holder.MovieInfo.setText(MoviePosition.country,MoviePosition.actors,MoviePosition.language)
-    holder.MovieScore.setText(MoviePosition.rating)
-    holder.MovieType.setText(MoviePosition.type)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val MoviePosition = movieList[position]
+        //holder.MovieImage.setImageResource(MoviePosition.poster)//这里需要int,但是poster是string
+        val Imagesrc: String = MoviePosition.getCover()
+        holder.MovieTitle.setText(MoviePosition.getTitle())
+        holder.MovieInfo.setText(MoviePosition.getCountry())
+        holder.MovieInfo.setText(MoviePosition.getActors())
+        holder.MovieInfo.setText(MoviePosition.getLanguage())
+        holder.MovieScore.setText(MoviePosition.getRating())
+        holder.MovieType.setText(MoviePosition.getType())
 
-}
+    }
 
 }
 

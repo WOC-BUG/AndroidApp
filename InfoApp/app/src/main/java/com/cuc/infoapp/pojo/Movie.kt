@@ -27,9 +27,7 @@ class Movie() {
     private var writers:String?=null
     private var year:Int?=null
 
-    fun Movies( error_code :Int , reason :String , movieid :String , actors :String , also_known_as:String , country:String , directors:String,
-                film_locations:String, generes:String , language:String , plot_simple:String , poster:String , rated:String , rating :String,
-                rating_count:String , release_date:String , runtime:String , title:String, type:String , writers:String , year:Int) {
+    init {
         this.error_code=error_code
         this.reason=reason
         this.movieid=movieid
