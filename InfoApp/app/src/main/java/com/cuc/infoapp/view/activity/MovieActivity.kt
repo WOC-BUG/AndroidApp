@@ -2,16 +2,49 @@ package com.cuc.infoapp.view.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.Comment
+import com.cuc.infoapp.pojo.Movie
 import com.cuc.infoapp.view.adapter.CommentAdapter
 import com.cuc.infoapp.view.adapter.PerformerAdapter
 import kotlinx.android.synthetic.main.chattingrobot_main.*
+import kotlinx.android.synthetic.main.item_movies.view.*
+import kotlinx.android.synthetic.main.item_news.*
+import kotlinx.android.synthetic.main.movie_basic_information.*
 import kotlinx.android.synthetic.main.movie_content.*
 
 class MovieActivity : AppCompatActivity() , View.OnClickListener{
+
+    private var movie: Movie = Movie()
+
+//    lateinit var title : String
+//    lateinit var poster : String
+//    lateinit var type : String
+//    lateinit var info : String
+//    lateinit var score : String
+//    lateinit var plot : String
+//    lateinit var actor : String
+//
+
+    private fun getMovieInfo() {
+//        //moviePoster.setImageResource(movie.getPoster())
+//        Glide.with(this).load(movie.getPoster()).error(R.drawable.movie1).into(moviePoster);
+//        movieTitle.setText(title)
+//        movieType.setText(type)
+//        movieInfo.setText(info)
+//        movieScore.setText(score)
+//        this.initActors()
+//        this.initComments()
+    }
+
+
 
     private val actorList = ArrayList<String>()    //演员列表
     private val commentList = ArrayList<Comment>()  //评论列表
@@ -23,12 +56,22 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movie_content)
 
+        movie = intent.getSerializableExtra("movieItem") as Movie  //获取传递过来的Movie对象
+        //Log.d("MainActivity",movie.getPoster().toString())
+
+        Glide.with(moviePoster.context).load(movie.getPoster()).error(R.drawable.movie1).into(moviePoster);
+        /*
+        通过获得的Movie对象初始化需展示的电影信息
+
+        */
+
         this.initActors()
         val layoutManager1 = LinearLayoutManager(this)
         layoutManager1.orientation = LinearLayoutManager.HORIZONTAL  //横向展示items
         performerRecyclerView.layoutManager = layoutManager1
         actorAdapter = PerformerAdapter(actorList)
         performerRecyclerView.adapter = actorAdapter
+
 
         this.initComments()
         val layoutManager2 = LinearLayoutManager(this)
@@ -58,6 +101,7 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
 
     }
 
+    //评论 点击事件
     override fun onClick(v: View?) {
         when (v) {
             accept_comment -> {

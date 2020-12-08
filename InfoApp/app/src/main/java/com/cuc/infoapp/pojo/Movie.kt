@@ -1,6 +1,8 @@
 package com.cuc.infoapp.pojo
 
-class Movie() {
+import java.io.Serializable
+
+class Movie(): Serializable {
     fun getCover(): String {
         TODO("不知道该干啥")
     }
@@ -20,7 +22,7 @@ class Movie() {
     private var rated:String?=null
     private var rating :String?=null
     private var rating_count:String?=null
-    private var release_date:String?=null
+    private var release_date:Int?=null
     private var runtime:String?=null
     private var title:String?=null
     private var type:String?=null
@@ -114,10 +116,10 @@ class Movie() {
         this.rating=rated
     }
 
-    fun getRelease_date(): String? {
+    fun getRelease_date(): Int? {
         return release_date
     }
-    fun setRelease_date(release_date: String){
+    fun setRelease_date(release_date: Int){
         this.release_date=release_date
     }
     fun getRuntime(): String? {
