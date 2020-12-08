@@ -7,5 +7,5 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cuc.infoapp.R
 
 class MovieVIewHolder(view: View): RecyclerView.ViewHolder(view) {
-    val movieItem: FrameLayout = view.findViewById<FrameLayout>(R.id.moviesItemLayout)
+    val movieItem: FrameLayout = view.findViewById(R.id.moviesItemLayout)
 }

@@ -1,6 +1,8 @@
 package com.cuc.infoapp.pojo
 
-class Movie() {
+import java.io.Serializable
+
+class Movie():Serializable {
     fun getCover(): String {
         TODO("不知道该干啥")
     }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.OrientationHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.Msg
+import com.cuc.infoapp.pojo.News
 import com.cuc.infoapp.service.Appservice
 import com.example.chatinterface.MsgAdapter
 import kotlinx.android.synthetic.main.chattingrobot_main.*
@@ -35,7 +36,6 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         adapter = MsgAdapter(msgList)
         recycler_view.adapter=adapter//回收视图的适配器是本适配器
         send.setOnClickListener(this)
-
 
     }
 
