@@ -29,29 +29,6 @@ class Movie():Serializable {
     private var writers:String?=null
     private var year:Int?=null
 
-    init {
-        this.error_code=error_code
-        this.reason=reason
-        this.movieid=movieid
-        this.actors=actors
-        this.also_known_as=also_known_as
-        this.country=country
-        this.directors=directors
-        this.film_locations=film_locations
-        this.generes=generes
-        this.language=language
-        this.plot_simple=plot_simple
-        this.poster=poster
-        this.rated=rated
-        this.rating=rating
-        this.rating_count=rating_count
-        this.release_date=release_date
-        this.runtime=runtime
-        this.title=title
-        this.type=type
-        this.writers=writers
-        this.year=year
-    }
     fun getError_code(): Int? {
         return error_code
     }
