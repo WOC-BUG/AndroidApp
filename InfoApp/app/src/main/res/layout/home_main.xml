@@ -10,26 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        >
+        tools:ignore="UseCompoundDrawables">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/person1"
-            android:id="@+id/headPortrait"
-            />
+            android:id="@+id/head_portrait" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/headPortrait"
             android:layout_gravity="center"
             android:text="@string/account"
-            android:textSize="30dp" />
+            android:textSize="30sp" />
 
     </LinearLayout>
 
 
-<view
+<View
     android:layout_width="match_parent"
     android:layout_height="1dp"/>
 
@@ -37,20 +35,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="my favorate movies"
-    android:textSize="30dp"
+    android:textSize="30sp"
     android:gravity="center"/>
-    <view
+    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-         
+        android:layout_height="wrap_content"
+        android:id="@+id/favorate_movie"
+        >
+
 
     </androidx.recyclerview.widget.RecyclerView>
 
     <com.github.clans.fab.FloatingActionButton
-        android:id="@+id/ButtonRobot"
+        android:id="@+id/button_robot"
+        style="@style/robot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/robot">

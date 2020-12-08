@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.Msg
 import com.cuc.infoapp.service.Appservice
-import com.cuc.infoapp.view.adapter.MsgAdapter
+import com.example.chatinterface.MsgAdapter
 import kotlinx.android.synthetic.main.chattingrobot_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,10 +31,12 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
 
         initMsg()
         val layoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = layoutManager
+        recycler_view.layoutManager = layoutManager
         adapter = MsgAdapter(msgList)
-        recyclerView.adapter=adapter//回收视图的适配器是本适配器
+        recycler_view.adapter=adapter//回收视图的适配器是本适配器
         send.setOnClickListener(this)
+
+
     }
 
     override fun onClick(v: View?) {
@@ -44,7 +49,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
 
                 var msg:Msg=Msg("",0)
                 val appService = retrofit.create(Appservice::class.java)
-                appService.getMessageByGet("free",0,inputText.text.toString())
+                appService.getMessageByGet("free",0,input_text.text.toString())
                     .enqueue(object : Callback<Msg> {
                         override fun onResponse(call: Call<Msg>, response: Response<Msg>) {
                             Log.d("Retrofit",response.body().toString())
@@ -59,13 +64,13 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
                             t.printStackTrace()
                         }
                     })
-                val content = inputText.text.toString()
+                val content =input_text.text.toString()
                 if(content.isNotEmpty()){
                     val msg4 = Msg(content,Msg.TYPE_SENT)
                     msgList.add(msg4)//写入
                     adapter?.notifyItemInserted(msgList.size-1) //在末尾添加item
-                    recyclerView.scrollToPosition(msgList.size-1)   //将下方的item移动到屏幕可见的最后一项
-                    inputText.setText("")
+                    recycler_view.scrollToPosition(msgList.size-1)   //将下方的item移动到屏幕可见的最后一项
+                    input_text.setText("")
                     val msg2=Msg(msg.toString(),Msg.TYPE_RECEIVED)
                     msgList.add(msg2)
                 }
@@ -73,7 +78,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun initMsg(){
+    fun initMsg(){
         val msg3=Msg("What do you what to know?",Msg.TYPE_RECEIVED)
         msgList.add(msg3)
     }

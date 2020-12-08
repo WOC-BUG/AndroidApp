@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.cuc.infoapp.R
+import com.cuc.infoapp.view.fragment.HomeFragment
 import com.cuc.infoapp.view.fragment.MovieFragment
 import com.cuc.infoapp.view.fragment.NewsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -26,14 +27,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //setContentView(R.layout.movie_content)
-       // listFragment.add(MovieContentFragment())    //添加电影详情Fragment
+        setContentView(R.layout.movie_content)
+        //listFragment.add(MovieContentFragment())    //添加电影详情Fragment
 
         //初始化控件
-        bottomNavigationView=findViewById(R.id.bottomNavigationView)
+        bottomNavigationView=findViewById(R.id.bottomNvigationView)
         viewPager=findViewById(R.id.viewPager)
         listFragment.add(NewsFragment())    //添加新闻Fragment
         listFragment.add(MovieFragment())    //添加视频Fragment
+        listFragment.add(HomeFragment())    //添加HomeFragment
 
         /* 未实现
         //电影海报点击监听事件

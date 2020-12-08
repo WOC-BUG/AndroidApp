@@ -15,7 +15,7 @@ class FloatButton : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
         setContentView(R.layout.home_main)
-        var buttonrobot: ImageView = view.findViewById(R.id.ButtonRobot)
+        var buttonrobot: ImageView = view.findViewById(R.id.button_robot)
     }
 //    floatingActionButton.setOnClickListener(new View.OnClickListener() {
 //        public void onClick(View:view) {

@@ -61,6 +61,7 @@ class NewsFragment:Fragment() {
         itemsRecyclerView.layoutManager=layoutManager
         //itemsRecyclerView.adapter=NewsAdapter(dataItems)
         itemsRecyclerView.adapter=NewsAdapter(getNews())
+
     }
 
     private fun getNews():List<News>{

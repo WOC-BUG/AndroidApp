@@ -1,7 +1,8 @@
-package com.cuc.infoapp.view.adapter
+package com.example.chatinterface
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.AbsListView
 import androidx.recyclerview.widget.RecyclerView
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.Msg
