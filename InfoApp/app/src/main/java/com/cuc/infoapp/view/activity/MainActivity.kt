@@ -12,6 +12,7 @@ import com.cuc.infoapp.R
 import com.cuc.infoapp.view.fragment.HomeFragment
 import com.cuc.infoapp.view.fragment.MovieFragment
 import com.cuc.infoapp.view.fragment.NewsFragment
+import com.cuc.infoapp.view.fragment.WeatherFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.item_news.*
 import java.util.*
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         viewPager=findViewById(R.id.viewPager)
         listFragment.add(NewsFragment())    //添加新闻Fragment
         listFragment.add(MovieFragment())    //添加视频Fragment
+        listFragment.add(WeatherFragment())    //添加视频Fragment
         listFragment.add(HomeFragment())    //添加HomeFragment
 
         /* 未实现

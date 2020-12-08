@@ -8,8 +8,10 @@
     <!--  今日天气  -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <include layout="@layout/today_weather"/>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -18,9 +20,10 @@
         android:background="#535353"/>
 
     <!--  未来7天天气  -->
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/futureWeatherRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="3"/>
 
 </LinearLayout>

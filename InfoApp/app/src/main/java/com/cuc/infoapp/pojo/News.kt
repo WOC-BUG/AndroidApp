@@ -13,28 +13,6 @@ class News:Serializable {
     private lateinit var thumbnailPicS02:String   //图片2
     private lateinit var thumbnailPicS03:String   //图片3
 
-    fun News(
-        uniqueKey: String,
-        title:String,
-        date:String,
-        category:String,
-        authorName:String,
-        url:String,
-        thumbnailPicS:String,
-        thumbnailPicS02:String,
-        thumbnailPicS03:String
-    ) {
-        this.uniqueKey=uniqueKey
-        this.title=title
-        this.date=date
-        this.category=category
-        this.authorName=authorName
-        this.url=url
-        this.thumbnailPicS=thumbnailPicS
-        this.thumbnailPicS02=thumbnailPicS02
-        this.thumbnailPicS03=thumbnailPicS03
-    }
-
     // 变量赋值
     fun setUniqueKey(uniqueKey: String){
         this.uniqueKey=uniqueKey
