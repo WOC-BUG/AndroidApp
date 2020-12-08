@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d8e0e8" >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,35 +28,29 @@
     </LinearLayout>
 
 
-<View
-    android:layout_width="match_parent"
-    android:layout_height="1dp"/>
-
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="my favorite movies"
-    android:textSize="30sp"
-    android:gravity="center"/>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp" />
+        android:layout_height="1dp"
+        android:background="#000"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="my favorite movies"
+        android:textSize="30sp"
+        android:gravity="center"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/favorate_movie"
-        >
+        android:id="@+id/favorate_movie"/>
 
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <com.github.clans.fab.FloatingActionButton
+<!--com.github.clans.fab.FloatingActionButton-->
+    <ImageView
         android:id="@+id/button_robot"
-        style="@style/robot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/robot">
-    </com.github.clans.fab.FloatingActionButton>
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/robot"
+        style="@style/robot"/>
 
 
 </LinearLayout>

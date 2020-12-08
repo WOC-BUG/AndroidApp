@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,13 +31,19 @@ class HomeFragment: Fragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.home_main, null, false)
 
+       val robotButton=view.findViewById<ImageView>(R.id.button_robot)
 //监听器配置
-
+       robotButton.setOnClickListener (Jump())
        return view
 
     }
 
-
+    class Jump:View.OnClickListener {
+        override fun onClick(v: View) {
+            val intent = Intent(v.context, ChatActivity::class.java)
+            v.context.startActivity(intent)
+        }
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         //initMovies()
@@ -48,6 +55,7 @@ class HomeFragment: Fragment() {
         favorate_movie.adapter = FavorateAdapter(initMovies())
 
     }
+
     private fun initMovies():List<Movie> {//这里是要传回的数据们
         val movie=Movie()
         movie.setTitle("哈利波特")
@@ -59,40 +67,9 @@ class HomeFragment: Fragment() {
         movieList.add(movie)
         return movieList
     }
-//    private open class OnClickListener(var movies: Movie) : View.OnClickListener {
-//        override fun onClick(v: View) {
-//            val intent = Intent(v.context, ChatActivity::class.java)
-//            intent.putExtra("movieItem",movies)
-//            v.context.startActivity(intent)
-//        }
-//    }
 
 }
 
-
-
-//    private val movieList = ArrayList<Movie>()
-//    //private lateinit var recyclerView: RecyclerView
-//    override fun onCreateView(//为了返回视图
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        initMovies()
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.home_main, null, false)
-//
-//    }
-//
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        val layoutManager =
-//            LinearLayoutManager(context)//抄的大佬的，不知道对不对哦
-//        layoutManager.orientation=LinearLayoutManager.VERTICAL
-//        recycler_view.layoutManager = layoutManager
-//        val adapter = MovieAdapter(movieList)
-//        recycler_view.adapter = adapter
-//    }
-//
 
 
 
