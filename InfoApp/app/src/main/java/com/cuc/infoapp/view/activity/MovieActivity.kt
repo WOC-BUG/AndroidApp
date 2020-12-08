@@ -1,12 +1,10 @@
 package com.cuc.infoapp.view.activity
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.TypedArray
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.cuc.infoapp.R
@@ -14,9 +12,6 @@ import com.cuc.infoapp.pojo.Comment
 import com.cuc.infoapp.pojo.Movie
 import com.cuc.infoapp.view.adapter.CommentAdapter
 import com.cuc.infoapp.view.adapter.PerformerAdapter
-import kotlinx.android.synthetic.main.chattingrobot_main.*
-import kotlinx.android.synthetic.main.item_movies.view.*
-import kotlinx.android.synthetic.main.item_news.*
 import kotlinx.android.synthetic.main.movie_basic_information.*
 import kotlinx.android.synthetic.main.movie_content.*
 
@@ -107,8 +102,8 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
             accept_comment -> {
                 val content = comment_box.text.toString()
                 if(content.isNotEmpty()){
-                    val i = (1..3).random()
-                    val cmn = Comment(getRandomName(),R.drawable.user2,content)
+
+                    val cmn = Comment(getRandomName(),getRandomImg(),content)
                     commentList.add(cmn)
                     //当有新评论，刷新RecyclerView中的显示
                     commentAdapter?.notifyItemInserted(commentList.size-1)
@@ -122,11 +117,17 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
     //产生随机字符串
     private fun getRandomName():String{
         var uName : String = ""
-        val list = mutableListOf<String>("dshXA01","hjdk_9","kid03","abc8","gds008","hser_3")
+        val list = mutableListOf<String>("dshXA01","hjdk_9","kid03","abc8","gds008","hser_3","Quhr111")
         list.shuffled().take(1).forEach{
             uName = it.toString()
         }
         return uName
+    }
+    //随机获取头像
+    private fun getRandomImg():Int{
+        val arrayOfImg: IntArray = intArrayOf(R.drawable.user1,R.drawable.user2,R.drawable.user3,R.drawable.user4,R.drawable.user5)
+        val i = (0..4).random()
+        return arrayOfImg[i]
     }
 
 }
