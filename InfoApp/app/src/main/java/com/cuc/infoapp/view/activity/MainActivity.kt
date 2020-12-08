@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         viewPager=findViewById(R.id.viewPager)
         listFragment.add(NewsFragment())    //添加新闻Fragment
         listFragment.add(MovieFragment())    //添加视频Fragment
-        listFragment.add(WeatherFragment())    //添加视频Fragment
+        listFragment.add(WeatherFragment())    //添加天气Fragment
         listFragment.add(HomeFragment())    //添加HomeFragment
 
         /* 未实现
