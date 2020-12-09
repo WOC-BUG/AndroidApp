@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/movie1"
         android:adjustViewBounds="true"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"/>
 
 
     <TextView

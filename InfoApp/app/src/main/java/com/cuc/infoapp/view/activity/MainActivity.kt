@@ -1,20 +1,36 @@
 package com.cuc.infoapp.view.activity
 
 import FragmentAdapter
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.location.Location
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import com.afollestad.assent.Permission
+import com.afollestad.assent.runWithPermissions
 import com.cuc.infoapp.R
+import com.cuc.infoapp.pojo.Position
+import com.cuc.infoapp.utils.AddressInfo
 import com.cuc.infoapp.view.fragment.HomeFragment
 import com.cuc.infoapp.view.fragment.MovieFragment
 import com.cuc.infoapp.view.fragment.NewsFragment
 import com.cuc.infoapp.view.fragment.WeatherFragment
+import com.cuc.test.Callback
+import com.cuc.test.LocationUtils
+import com.cuc.test.Utils
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_news.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -22,32 +38,21 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView:BottomNavigationView //底部导航栏
     private lateinit var viewPager:ViewPager //中间切换页面
     private lateinit var menuItem:MenuItem  //选中的按钮
+    private val pos:Position= Position(0.0,0.0,"")
     //四个页面
     private var listFragment : ArrayList<Fragment> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-       // setContentView(R.layout.movie_content)
-        //listFragment.add(MovieContentFragment())    //添加电影详情Fragment
 
         //初始化控件
-        bottomNavigationView=findViewById(R.id.bottomNvigationView)
+        bottomNavigationView=findViewById(R.id.bottomNavigationView)
         viewPager=findViewById(R.id.viewPager)
         listFragment.add(NewsFragment())    //添加新闻Fragment
         listFragment.add(MovieFragment())    //添加视频Fragment
         listFragment.add(WeatherFragment())    //添加天气Fragment
         listFragment.add(HomeFragment())    //添加HomeFragment
-
-        /* 未实现
-        //电影海报点击监听事件
-        val movieItem : FrameLayout = findViewById(R.id.moviesItemLayout)
-        movieItem.setOnClickListener {
-            fun onClick(){
-                val intent = Intent( this, MovieActivity::class.java)
-                startActivity(intent)
-            }
-        }*/
 
         //默认选中第一个页面
         bottomNavigationView.menu.getItem(0).isChecked = true;
@@ -59,6 +64,10 @@ class MainActivity : AppCompatActivity() {
         //设置页面适配器
         viewPager.adapter=FragmentAdapter(supportFragmentManager,listFragment)
         viewPager.offscreenPageLimit = 4
+
+        locate()
+        Toast.makeText(this,pos.city+" "+pos.latitude +" "+pos.longitude,Toast.LENGTH_LONG).show()
+
     }
 
 
@@ -112,4 +121,42 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         }
+
+
+
+// GPS定位
+// 源码：  https://blog.csdn.net/yinxing2008/article/details/85695163
+// 博客代码不全，去他的gitee里看
+private fun locate() {
+    //locationTv.text = ""
+    runWithPermissions(Permission.ACCESS_FINE_LOCATION) {
+        if (LocationUtils.isLocationProviderEnabled(this@MainActivity)) {
+            progressBar.visibility = View.VISIBLE
+            showLocationWithToast()
+        } else {
+            Utils.showAlert("本应用需要获取地理位置，请打开获取位置的开关", this)
+        }
+    }
+}
+
+    private fun showLocationWithToast() {
+        LocationUtils.getLocation(this@MainActivity, object : Callback {
+            override fun onLocationChanged(location: Location) {
+                onGetLocation(location)
+            }
+        })
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun onGetLocation(location: Location) {
+        GlobalScope.launch(Dispatchers.IO) {
+            val result = Utils.getAddressInfo(location)
+            launch(Dispatchers.Main) {
+                result?.let {
+                    locationTv.text=result.result.addressComponent.city+","+result.result.location.lat.toString()+","+result.result.location.lng
+                    progressBar.visibility = View.GONE
+                }
+            }
+        }
+    }
 }
