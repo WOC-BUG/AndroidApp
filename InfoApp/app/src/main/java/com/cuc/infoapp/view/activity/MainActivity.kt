@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity() {
         //初始化控件
         bottomNavigationView=findViewById(R.id.bottomNavigationView)
         viewPager=findViewById(R.id.viewPager)
-//        listFragment.add(NewsFragment())    //添加新闻Fragment
-//        listFragment.add(MovieFragment())    //添加视频Fragment
-//        listFragment.add(WeatherFragment())    //添加天气Fragment
+        listFragment.add(NewsFragment())    //添加新闻Fragment
+        listFragment.add(MovieFragment())    //添加视频Fragment
+        listFragment.add(WeatherFragment())    //添加天气Fragment
         listFragment.add(HomeFragment())    //添加HomeFragment
 
         //默认选中第一个页面
