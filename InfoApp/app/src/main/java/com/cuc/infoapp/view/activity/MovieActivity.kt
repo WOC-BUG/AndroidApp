@@ -2,6 +2,7 @@ package com.cuc.infoapp.view.activity
 
 import android.content.res.TypedArray
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,32 +18,34 @@ import kotlinx.android.synthetic.main.movie_content.*
 
 class MovieActivity : AppCompatActivity() , View.OnClickListener{
 
-    private var movie: Movie = Movie()
+    //private var movie: Movie = Movie()
+    private lateinit var movie: Movie
+    private lateinit var actorList: List<String>    //演员列表
+    private var commentList = ArrayList<Comment>()  //评论列表
 
-//    lateinit var title : String
-//    lateinit var poster : String
-//    lateinit var type : String
-//    lateinit var info : String
-//    lateinit var score : String
-//    lateinit var plot : String
-//    lateinit var actor : String
-//
-
+    //初始化
     private fun getMovieInfo() {
-//        //moviePoster.setImageResource(movie.getPoster())
-//        Glide.with(this).load(movie.getPoster()).error(R.drawable.movie1).into(moviePoster);
-//        movieTitle.setText(title)
-//        movieType.setText(type)
-//        movieInfo.setText(info)
-//        movieScore.setText(score)
-//        this.initActors()
-//        this.initComments()
+
+        val generes:String = movie.generes
+        val language:String = movie.language
+        val release_date:String = movie.release_date.toString()
+        val runtime: String = movie.runtime
+        var country:String = movie.country
+
+        //基本信息
+        Glide.with(this).load(movie.poster).error(R.drawable.movie1).into(moviePoster);
+        movieTitle.setText(movie.title)
+        movieType.setText("$generes/$language")
+        val info = "$runtime/$release_date$country 上映"
+        movieInfo.setText(info)
+        movieScore.setText(movie.rating)
+        movieIntroduction.setText(movie.plot_simple)
+        //简介
+        actorList = movie.actors.split(',')
+        //评论
+        this.initComments()
     }
 
-
-
-    private val actorList = ArrayList<String>()    //演员列表
-    private val commentList = ArrayList<Comment>()  //评论列表
 
     private var actorAdapter : PerformerAdapter ?= null
     private var commentAdapter : CommentAdapter ?= null
@@ -54,13 +57,12 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
         movie = intent.getSerializableExtra("movieItem") as Movie  //获取传递过来的Movie对象
         //Log.d("MainActivity",movie.getPoster().toString())
 
-        Glide.with(moviePoster.context).load(movie.getPoster()).error(R.drawable.movie1).into(moviePoster);
-        /*
-        通过获得的Movie对象初始化需展示的电影信息
+        Glide.with(moviePoster.context).load(movie.poster).error(R.drawable.movie1).into(moviePoster);
 
-        */
+        //通过获得的Movie对象初始化需展示的电影信息
+        this.getMovieInfo()
 
-        this.initActors()
+        //this.initActors()
         val layoutManager1 = LinearLayoutManager(this)
         layoutManager1.orientation = LinearLayoutManager.HORIZONTAL  //横向展示items
         performerRecyclerView.layoutManager = layoutManager1
@@ -68,7 +70,7 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
         performerRecyclerView.adapter = actorAdapter
 
 
-        this.initComments()
+        //this.initComments()
         val layoutManager2 = LinearLayoutManager(this)
         commentRecyclerView.layoutManager = layoutManager2
         layoutManager2.orientation= LinearLayoutManager.VERTICAL     //纵向展示items
@@ -78,14 +80,14 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
     }
 
     //初始化演员数组
-    private fun initActors(){
-        //从网络获取数据
-
-        //test
-        for(i in 1..10){
-            actorList.add("actor $i")
-        }
-    }
+//    private fun initActors(){
+//        //从网络获取数据
+//
+//        //test
+//        for(i in 1..10){
+//            actorList.add("actor $i")
+//        }
+//    }
     //初始化评论数组
     private fun initComments() {
 

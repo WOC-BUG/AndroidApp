@@ -32,7 +32,7 @@ class HomeFragment: Fragment() {
         val view: View = inflater.inflate(R.layout.home_main, null, false)
 
        val robotButton=view.findViewById<ImageView>(R.id.button_robot)
-//监听器配置
+       //监听器配置
        robotButton.setOnClickListener (Jump())
        return view
 
@@ -57,13 +57,15 @@ class HomeFragment: Fragment() {
     }
 
     private fun initMovies():List<Movie> {//这里是要传回的数据们
-        val movie=Movie()
-        movie.setTitle("哈利波特")
-        movie.setLanguage("English")
-        movie.setactors("Harry Potter")
-        movie.setCountry("English")
-        movie.setRating("1")
-        movie.setType("1")
+        val movie=Movie("1","Harry Potter","aaaa","England", "hhhh",
+        "America","series","English","hhjfhdasjhf","https://image.so.com/view?src=360pic_normal&z=1&i=0&cmg=15484592.4338877712468962300.1587368121393.3513&q=harry%20potter&correct=harry%20potter&ancestor=list&cmsid=6e2622a2a33ed119c8ec5ff264b76f0c&cmras=6&cn=0&gn=0&kn=28&crn=0&bxn=20&fsn=108&cuben=0&pornn=0&manun=39&adstar=0&clw=229#id=b734588af149642e98aa4a96fe3dd730&currsn=0&ps=102&pc=102",
+        "9.1","2389439",2004,"120", "哈利波特", "null","dsdsa",2020)
+//        movie.setTitle("哈利波特")
+//        movie.setLanguage("English")
+//        movie.setactors("Harry Potter")
+//        movie.setCountry("English")
+//        movie.setRating("1")
+//        movie.setType("1")
         movieList.add(movie)
         return movieList
     }

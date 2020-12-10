@@ -1,20 +1,11 @@
 package com.cuc.infoapp.view.adapter
 
-import android.content.DialogInterface
-import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.Movie
-import com.cuc.infoapp.pojo.News
-import com.cuc.infoapp.view.activity.ChatActivity
-import com.cuc.infoapp.view.activity.NewsActivity
 import com.cuc.infoapp.view.holder.FavoriteViewHolder
-import com.cuc.infoapp.view.holder.MovieVIewHolder
-import kotlinx.android.synthetic.main.item_movies.view.*
 
 class FavorateAdapter(private val movieList: List<Movie>) : RecyclerView.Adapter<FavoriteViewHolder>(){
 

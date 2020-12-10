@@ -1,6 +1,7 @@
 package com.cuc.infoapp.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +12,16 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.Movie
+import com.cuc.infoapp.service.MovieBean
+//import com.cuc.infoapp.service.MovieHttp
+import com.cuc.infoapp.service.MovieService
 import com.cuc.infoapp.view.adapter.MovieAdapter
 import kotlinx.android.synthetic.main.news_or_movies.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
 class MovieFragment:Fragment() {
@@ -50,17 +59,78 @@ class MovieFragment:Fragment() {
         //瀑布流
         val layoutManager= StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         itemsRecyclerView.layoutManager=layoutManager
-        itemsRecyclerView.adapter=MovieAdapter(getMovies())
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://v.juhe.cn/movie/")   //基址
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        lateinit var back: MovieBean
+        var moviesData: List<Movie> = ArrayList()
+        val moviesList=ArrayList<Movie>()
+
+        val movieService = retrofit.create(MovieService::class.java)
+        movieService.getMovieData("e97579555ffaca1a38be537090e108a6","哥斯拉")
+            .enqueue(object : Callback<MovieBean> {
+                override fun onResponse(call: Call<MovieBean>, response: Response<MovieBean>) {
+                    if(response.isSuccessful){
+                        back = response.body()!!
+                        moviesData = back.result
+                        for(i in moviesData.indices){
+                            var movie :Movie = moviesData[i]
+                            moviesList.add(movie)
+                        }
+
+                        itemsRecyclerView.adapter=MovieAdapter(moviesList)
+
+                        if(moviesList != null){
+                            for(i in moviesList.indices){
+                                Log.d("MovieHttp",moviesList[i].actors)
+                                Log.d("MovieHttp",moviesList[i].title)
+                                Log.d("MovieHttp","成功获取数据！")
+                                println(moviesData)
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                override fun onFailure(call: Call<MovieBean>, t: Throwable) {
+                    t.printStackTrace()
+                }
+            })
+
+        //itemsRecyclerView.adapter=MovieAdapter(getMovies())
+//        val manager = MovieHttp()
+//        //itemsRecyclerView.adapter=MovieAdapter(manager.getMovies("哥斯拉"))
+//        val moviesList=ArrayList<Movie>()
+//        val subjects: List<Movie> = manager.getMovies("哥斯拉")
+//        var movie: Movie
+//        for (i in subjects.indices) {
+//            movie = subjects[i]
+//            moviesList.add(movie)
+//            Log.d("MovieFragment",movie.title)
+//            Log.d("MovieFragment",movie.actors)
+//
+//            //println(moviesList[i].title)
+//            //println(moviesList[i].actors)
+//        }
+//
+//        itemsRecyclerView.adapter=MovieAdapter(moviesList)
+
     }
 
-    private fun getMovies():List<Movie>{
-        val moviesList=ArrayList<Movie>()
-        for(i in 1..10){
-            val movies=Movie()
-            movies.setTitle("This is title $i")
-            movies.setPoster("https://tu.tianzuida.com/pic/upload/vod/2019-11-22/201911221574404114.jpg")
-            moviesList.add(movies)
-        }
-        return moviesList
-    }
+//    private fun getMovies():List<Movie>{
+//        val moviesList=ArrayList<Movie>()
+//        for(i in 1..10){
+//            val movies=Movie()
+//            movies.setTitle("This is title $i")
+//            movies.setPoster("https://tu.tianzuida.com/pic/upload/vod/2019-11-22/201911221574404114.jpg")
+//            moviesList.add(movies)
+//        }
+//        return moviesList
+//    }
 }
