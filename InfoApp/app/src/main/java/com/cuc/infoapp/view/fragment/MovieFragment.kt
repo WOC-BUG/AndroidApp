@@ -83,16 +83,16 @@ class MovieFragment:Fragment() {
 
                         itemsRecyclerView.adapter=MovieAdapter(moviesList)
 
-                        if(moviesList != null){
-                            for(i in moviesList.indices){
-                                Log.d("MovieHttp",moviesList[i].actors)
-                                Log.d("MovieHttp",moviesList[i].title)
-                                Log.d("MovieHttp","成功获取数据！")
-                                println(moviesData)
-
-                            }
-
-                        }
+//                        if(moviesList != null){
+//                                for(i in moviesList.indices){
+//                                    Log.d("MovieHttp",moviesList[i].actors)
+//                                    Log.d("MovieHttp",moviesList[i].title)
+//                                    Log.d("MovieHttp","成功获取数据！")
+//                                    println(moviesData)
+//
+//                                }
+//
+//                        }
 
                     }
 

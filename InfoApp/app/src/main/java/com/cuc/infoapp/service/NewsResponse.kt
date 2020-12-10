@@ -1,6 +1,4 @@
-package com.cuc.infoapp.pojo
-
-import com.google.gson.annotations.SerializedName
+package com.cuc.infoapp.service
 
 data class NewsResponse(
     var reason: String,

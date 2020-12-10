@@ -14,8 +14,9 @@ class Api {
     var cityId:Int=0    //城市ID
 
     //天气接口
-    var weatherUrl:String="http://v.juhe.cn/weather/uni" //接口地址
+    var weatherUrl:String="http://v.juhe.cn/weather/index" //接口地址
     var weatherKey:String="06b240642fdae5d9a9a681f5762e8e29"    //APPKEY
     var cityName:String="北京"    //城市
+    var getWeather:String = "$weatherUrl?format=2&cityname=$cityName&key=$weatherKey"
 
 }

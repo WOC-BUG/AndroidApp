@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import com.cuc.infoapp.R
-import com.cuc.infoapp.pojo.News
+import com.cuc.infoapp.service.News
 import kotlinx.android.synthetic.main.news_content.*
 
 class NewsActivity : AppCompatActivity() {

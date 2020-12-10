@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cuc.infoapp.R
-import com.cuc.infoapp.pojo.News
+import com.cuc.infoapp.service.News
 import com.cuc.infoapp.view.activity.NewsActivity
 import com.cuc.infoapp.view.holder.NewsViewHolder
 import kotlinx.android.synthetic.main.item_news.view.*
@@ -25,9 +25,9 @@ class NewsAdapter(private var newsList: List<News>) : RecyclerView.Adapter<NewsV
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val news=newsList[position]
-        holder.newsItem.newsTitle.text=news.title//news.getTitle()
-        holder.newsItem.newsAuthor.text=news.author_name//news.getauthor_name()
-        holder.newsItem.newsDate.text=news.date//news.getDate()
+        holder.newsItem.newsTitle.text=news.title
+        holder.newsItem.newsAuthor.text=news.author_name
+        holder.newsItem.newsDate.text=news.date
         /*
         图片加载方法：
         https://blog.csdn.net/weixin_43396054/article/details/108992191

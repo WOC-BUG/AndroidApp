@@ -1,7 +1,6 @@
 package com.cuc.infoapp.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.*
+import com.cuc.infoapp.service.News
+import com.cuc.infoapp.service.NewsResponse
 import com.cuc.infoapp.view.adapter.NewsAdapter
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.news_or_movies.*
@@ -30,7 +31,6 @@ class NewsFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view:View=inflater.inflate(R.layout.news_or_movies, null, false)
         //refreshLayout=view.findViewById(R.id.itemsRefresh)
         //itemsRefresh.setDelegate()
         /*
@@ -46,7 +46,7 @@ class NewsFragment:Fragment() {
 //        itemsRefresh.setRefreshViewHolder(refreshViewHolder)
 //
 //        itemsRefresh.beginRefreshing();
-        return view
+        return inflater.inflate(R.layout.news_or_movies, null, false)
     }
 
     //  当Activity完成onCreate()时调用
@@ -60,9 +60,10 @@ class NewsFragment:Fragment() {
     }
 
     private fun showResponse(response: String) {
-        println(response)
+        //println(response)
         val gson = Gson()
-        val person:NewsResponse=gson.fromJson(response,NewsResponse::class.java)
+        val person: NewsResponse =gson.fromJson(response,
+            NewsResponse::class.java)
         itemsRecyclerView.adapter=NewsAdapter(person.result.data)
     }
 
@@ -70,7 +71,7 @@ class NewsFragment:Fragment() {
         thread{
             var connection: HttpURLConnection? = null
             try{
-                var response = StringBuilder()
+                val response = StringBuilder()
                 val url= URL(Api().getNews)
                 connection = url.openConnection() as HttpURLConnection  //连接
                 connection.requestMethod = "GET";

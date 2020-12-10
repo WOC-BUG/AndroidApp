@@ -8,13 +8,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cuc.infoapp.R
-import com.cuc.infoapp.pojo.Weather
+import com.cuc.infoapp.pojo.Api
+import com.cuc.infoapp.service.WeatherResponse
 import com.cuc.infoapp.view.adapter.WeatherAdapter
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.news_or_movies.*
+import kotlinx.android.synthetic.main.today_weather.*
+import kotlinx.android.synthetic.main.today_weather.view.*
 import kotlinx.android.synthetic.main.weather_content.*
-import java.util.ArrayList
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.lang.StringBuilder
+import java.net.HttpURLConnection
+import java.net.URL
+import kotlin.concurrent.thread
 
 class WeatherFragment: Fragment() {
-    private val weatherItems: List<Weather> = ArrayList()
 
     // 创建Fragment的布局
     override fun onCreateView(
@@ -22,8 +31,7 @@ class WeatherFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.weather_content, null, false)
-        return view
+        return inflater.inflate(R.layout.weather_content, null, false)
     }
 
     //  当Activity完成onCreate()时调用
@@ -33,22 +41,50 @@ class WeatherFragment: Fragment() {
         val layoutManager= LinearLayoutManager(context)
         layoutManager.orientation= LinearLayoutManager.VERTICAL    //垂直排列
         futureWeatherRecyclerView.layoutManager=layoutManager
-        //itemsRecyclerView.adapter=NewsAdapter(dataItems)
-        futureWeatherRecyclerView.adapter= WeatherAdapter(getWeather())
-
+        sendRequest()
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    private fun getWeather():List<Weather>{
-        val weatherList= ArrayList<Weather>()
-        for(i in 1..7){
-            val weather= Weather()
-            weather.setCityName("北京")
-            weather.setDate("2020年12月8日")
-            weather.setTemperature("3°C")
-            weather.setWeatherImage(this.resources.getDrawable(R.drawable.weather1))
-            weatherList.add(weather)
+    @SuppressLint("SetTextI18n")
+    private fun showResponse(response: String) {
+        println(response)
+        val gson = Gson()
+        val weather: WeatherResponse =gson.fromJson(response,
+            WeatherResponse::class.java)
+        //今日天气
+        currentTemperature.text=weather.result.sk.temp+"°C"
+        todayTemperature.text=weather.result.today.temperature
+        city.text=weather.result.today.city
+        otherInfo.text=weather.result.today.weather +" | "+ weather.result.today.wind
+        //未来7日天气RecyclerView
+        futureWeatherRecyclerView.adapter= WeatherAdapter(weather.result.future)
+    }
+
+    private fun sendRequest(){
+        thread{
+            var connection: HttpURLConnection? = null
+            try{
+                var response = StringBuilder()
+                val url= URL(Api().getWeather)
+                connection = url.openConnection() as HttpURLConnection  //连接
+                connection.requestMethod = "GET";
+                connection.connectTimeout = 8000
+                connection.readTimeout = 8000
+                val input = connection.inputStream //获取输入流
+
+                //对获取到的输入流进行读取
+                val reader = BufferedReader (InputStreamReader(input))
+                reader.use {
+                    reader.forEachLine {
+                        response.append(it)
+                    }
+                }
+                showResponse(response.toString())
+            }catch (e:Exception){
+                e.printStackTrace()
+            }finally {
+                connection?.disconnect()
+            }
         }
-        return weatherList
     }
+
 }
