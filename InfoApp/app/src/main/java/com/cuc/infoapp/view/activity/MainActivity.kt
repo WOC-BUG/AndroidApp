@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView=findViewById(R.id.bottomNavigationView)
         viewPager=findViewById(R.id.viewPager)
         listFragment.add(NewsFragment())    //添加新闻Fragment
-        listFragment.add(MovieFragment())    //添加视频Fragment
-        listFragment.add(WeatherFragment())    //添加天气Fragment
-        listFragment.add(HomeFragment())    //添加HomeFragment
+//        listFragment.add(MovieFragment())    //添加视频Fragment
+//        listFragment.add(WeatherFragment())    //添加天气Fragment
+//        listFragment.add(HomeFragment())    //添加HomeFragment
 
         //默认选中第一个页面
         bottomNavigationView.menu.getItem(0).isChecked = true;
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         viewPager.offscreenPageLimit = 4
 
         locate()
-        Toast.makeText(this,pos.city+" "+pos.latitude +" "+pos.longitude,Toast.LENGTH_LONG).show()
+        //Toast.makeText(this,pos.city+" "+pos.latitude +" "+pos.longitude,Toast.LENGTH_LONG).show()
 
     }
 
@@ -150,10 +150,10 @@ private fun locate() {
     @SuppressLint("SetTextI18n")
     private fun onGetLocation(location: Location) {
         GlobalScope.launch(Dispatchers.IO) {
-            val result = Utils.getAddressInfo(location)
+            val locationResult = Utils.getAddressInfo(location)
             launch(Dispatchers.Main) {
-                result?.let {
-                    locationTv.text=result.result.addressComponent.city+","+result.result.location.lat.toString()+","+result.result.location.lng
+                locationResult?.let {
+                    locationTv.text=locationResult.result.addressComponent.city+","+locationResult.result.location.lat.toString()+","+locationResult.result.location.lng
                     progressBar.visibility = View.GONE
                 }
             }

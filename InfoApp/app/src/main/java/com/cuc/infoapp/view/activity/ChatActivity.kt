@@ -4,13 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.OrientationHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.Msg
-import com.cuc.infoapp.pojo.News
 import com.cuc.infoapp.service.Appservice
 import com.example.chatinterface.MsgAdapter
 import kotlinx.android.synthetic.main.chattingrobot_main.*

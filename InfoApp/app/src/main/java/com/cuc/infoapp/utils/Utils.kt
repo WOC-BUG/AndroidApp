@@ -27,7 +27,7 @@ object Utils {
         var addressInfo: AddressInfo? = null
 
         //http://api.map.baidu.com/reverse_geocoding/v3/?ak=BzVZdc7KsVHT3XSdnfg1hafhtIRKfO5q&mcode=BE:68:DF:FE:44:DF:C2:46:03:1C:82:27:AF:B0:B2:75:9F:D8:85:1E;com.cuc.infoapp&location=116.40387397,39.91488908&dataType=json
-        val baiduAk = "BzVZdc7KsVHT3XSdnfg1hafhtIRKfO5q"
+        val baiduAk = "xZaQoG0PG1HdsBj3ver34zD5MzEFy4ck"
         val Sha1="BE:68:DF:FE:44:DF:C2:46:03:1C:82:27:AF:B0:B2:75:9F:D8:85:1E"
         val packageName="com.cuc.infoapp"
 

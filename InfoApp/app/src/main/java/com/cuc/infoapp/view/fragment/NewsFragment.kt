@@ -1,25 +1,24 @@
 package com.cuc.infoapp.view.fragment
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cuc.infoapp.R
-import com.cuc.infoapp.pojo.News
-import com.cuc.infoapp.view.activity.MainActivity
-import com.cuc.infoapp.view.activity.NewsActivity
+import com.cuc.infoapp.pojo.*
 import com.cuc.infoapp.view.adapter.NewsAdapter
-import com.google.android.material.internal.ContextUtils.getActivity
-import kotlinx.android.synthetic.main.item_news.*
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.news_or_movies.*
-import java.util.*
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.lang.StringBuilder
+import java.net.HttpURLConnection
+import java.net.URL
+import kotlin.collections.ArrayList
+import kotlin.concurrent.thread
 
 
 class NewsFragment:Fragment() {
@@ -31,7 +30,7 @@ class NewsFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.news_or_movies, null, false)
+        val view:View=inflater.inflate(R.layout.news_or_movies, null, false)
         //refreshLayout=view.findViewById(R.id.itemsRefresh)
         //itemsRefresh.setDelegate()
         /*
@@ -47,8 +46,6 @@ class NewsFragment:Fragment() {
 //        itemsRefresh.setRefreshViewHolder(refreshViewHolder)
 //
 //        itemsRefresh.beginRefreshing();
-
-
         return view
     }
 
@@ -59,22 +56,41 @@ class NewsFragment:Fragment() {
         val layoutManager= LinearLayoutManager(context)
         layoutManager.orientation=LinearLayoutManager.VERTICAL    //垂直排列
         itemsRecyclerView.layoutManager=layoutManager
-        //itemsRecyclerView.adapter=NewsAdapter(dataItems)
-        itemsRecyclerView.adapter=NewsAdapter(getNews())
-
+        sendRequest()
     }
 
-    private fun getNews():List<News>{
-        val newsList=ArrayList<News>()
-        for(i in 1..10){
-            val news=News()
-            news.setUrl("https://blog.csdn.net/yaoyaoyao_123/article/details/85205594")
-            news.setTitle("This is title $i")
-            news.setAuthorName("This is Author $i")
-            news.setDate("This is Date $i")
-            news.setThumbnailPicS(1,"http://n.sinaimg.cn/default/1_img/upload/3933d981/27/w930h697/20201206/ba38-keyancw4531896.jpg")
-            newsList.add(news)
+    private fun showResponse(response: String) {
+        println(response)
+        val gson = Gson()
+        val person:NewsResponse=gson.fromJson(response,NewsResponse::class.java)
+        itemsRecyclerView.adapter=NewsAdapter(person.result.data)
+    }
+
+    private fun sendRequest(){
+        thread{
+            var connection: HttpURLConnection? = null
+            try{
+                var response = StringBuilder()
+                val url= URL(Api().getNews)
+                connection = url.openConnection() as HttpURLConnection  //连接
+                connection.requestMethod = "GET";
+                connection.connectTimeout = 8000
+                connection.readTimeout = 8000
+                val input = connection.inputStream //获取输入流
+
+                //对获取到的输入流进行读取
+                val reader = BufferedReader (InputStreamReader(input))
+                reader.use {
+                    reader.forEachLine {
+                        response.append(it)
+                    }
+                }
+                showResponse(response.toString())
+            }catch (e:Exception){
+                e.printStackTrace()
+            }finally {
+                connection?.disconnect()
+            }
         }
-        return newsList
     }
 }

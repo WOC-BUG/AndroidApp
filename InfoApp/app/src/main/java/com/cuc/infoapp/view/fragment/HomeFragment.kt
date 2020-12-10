@@ -6,16 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.Movie
-import com.cuc.infoapp.pojo.News
 import com.cuc.infoapp.view.activity.ChatActivity
-import com.cuc.infoapp.view.activity.NewsActivity
 import com.cuc.infoapp.view.adapter.FavorateAdapter
-import com.cuc.infoapp.view.adapter.NewsAdapter
 import kotlinx.android.synthetic.main.home_main.*
 import java.util.*
 
