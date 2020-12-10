@@ -11,7 +11,6 @@
     android:paddingRight="10dp"
     android:paddingTop="10dp">
 
-
     <ImageView
         android:id="@+id/newsImage"
         android:layout_width="0dp"
