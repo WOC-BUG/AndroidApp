@@ -32,6 +32,24 @@
             app:layout_constraintStart_toEndOf="@+id/moviePoster"
             app:layout_constraintTop_toTopOf="@+id/moviePoster"
             tools:ignore="MissingConstraints" />
+        <!--  电影评分  -->
+        <TextView
+            android:id="@+id/movieScore"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="9.7"
+            app:layout_constraintStart_toStartOf="@+id/movieTitle"
+            app:layout_constraintTop_toBottomOf="@+id/movieTitle"
+            app:layout_constraintBottom_toBottomOf="@+id/checkStar"
+            tools:ignore="MissingConstraints" />
+        <!--  收藏选项  -->
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/checkStar"
+            style="@style/star"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:layout_constraintStart_toEndOf="@+id/movieScore"
+            app:layout_constraintTop_toBottomOf="@+id/movieTitle" />
 
         <!--  电影类型  -->
         <TextView
@@ -41,7 +59,7 @@
             android:text="MovieType"
             android:textSize="15sp"
             android:layout_margin="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/movieTitle"
+            app:layout_constraintTop_toBottomOf="@+id/movieScore"
             app:layout_constraintStart_toEndOf="@+id/moviePoster" />
 
         <!--  电影信息  -->
@@ -51,29 +69,29 @@
             android:layout_height="wrap_content"
             android:text="MovieInformation"
             android:layout_margin="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/checkStar"
+            app:layout_constraintBottom_toBottomOf="@+id/moviePoster"
             app:layout_constraintStart_toEndOf="@+id/moviePoster"
             app:layout_constraintTop_toBottomOf="@+id/movieType" />
 
-        <!--  电影评分  -->
-        <TextView
-            android:id="@+id/movieScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="9.7"
-            app:layout_constraintBottom_toBottomOf="@+id/checkStar"
-            app:layout_constraintStart_toStartOf="@+id/moviePoster"
-            app:layout_constraintTop_toBottomOf="@+id/moviePoster"
-            tools:ignore="MissingConstraints" />
+<!--        &lt;!&ndash;  电影评分  &ndash;&gt;-->
+<!--        <TextView-->
+<!--            android:id="@+id/movieScore"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="9.7"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/checkStar"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/moviePoster"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/moviePoster"-->
+<!--            tools:ignore="MissingConstraints" />-->
 
-        <!--  收藏选项  -->
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/checkStar"
-            style="@style/star"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            app:layout_constraintEnd_toEndOf="@+id/moviePoster"
-            app:layout_constraintTop_toBottomOf="@+id/moviePoster" />
+<!--        &lt;!&ndash;  收藏选项  &ndash;&gt;-->
+<!--        <androidx.appcompat.widget.AppCompatCheckBox-->
+<!--            android:id="@+id/checkStar"-->
+<!--            style="@style/star"-->
+<!--            android:layout_width="25dp"-->
+<!--            android:layout_height="25dp"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/moviePoster"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/moviePoster" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View

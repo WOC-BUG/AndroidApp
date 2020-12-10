@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
     android:id="@+id/moviesContentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,11 +23,20 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--  电影简介  -->
+<!--        <com.ms.square.android.expandabletextview.ExpandableTextView-->
         <TextView
             android:id="@+id/movieIntroduction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="这是电影简介~~"/>
+            android:text="这是电影简介~~"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+<!--        <ImageButton-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="right|bottom"-->
+<!--            android:background="@android:color/transparent"/>-->
+<!--    </com.ms.square.android.expandabletextview.ExpandableTextView>-->
 
         <View
             android:layout_width="match_parent"

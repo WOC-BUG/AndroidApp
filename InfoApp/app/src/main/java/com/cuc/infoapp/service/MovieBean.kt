@@ -31,38 +31,5 @@ class MovieBean( var error_code: Int, var resultcode: Int, var reason: String, v
     ],
         "error_code": 0
     */
-//    private var error_code: Int? = null   //返回码
-//    private var resultcode: Int? = null  //
-//    private lateinit var reason: String   //返回说明
-//    private lateinit var result :List<Movie>  //返回结果集
-//
-//    //变量赋值
-//    fun setErrorCode(error_code: Int){
-//        this.error_code = error_code
-//    }
-//    fun setResultCode(resultcode: Int){
-//        this.resultcode = resultcode
-//    }
-//    fun setReason(reason: String){
-//        this.reason = reason
-//    }
-//    fun setResult(result: List<Movie>){
-//        this.result = result
-//    }
-//
-//    //获取数据
-//    fun getErrorCode(): Int?{
-//        return this.error_code
-//    }
-//    fun getResultCode(): Int?{
-//        return this.resultcode
-//    }
-//    fun getReason():String{
-//        return this.reason
-//    }
-//    fun getResult(): List<Movie>{
-//        return this.result
-//    }
-
 
 }
