@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.assent.Permission
@@ -49,9 +50,9 @@ class MainActivity : AppCompatActivity() {
         //初始化控件
         bottomNavigationView=findViewById(R.id.bottomNavigationView)
         viewPager=findViewById(R.id.viewPager)
-        listFragment.add(NewsFragment())    //添加新闻Fragment
-        listFragment.add(MovieFragment())    //添加视频Fragment
-        listFragment.add(WeatherFragment())    //添加天气Fragment
+//        listFragment.add(NewsFragment())    //添加新闻Fragment
+//        listFragment.add(MovieFragment())    //添加视频Fragment
+//        listFragment.add(WeatherFragment())    //添加天气Fragment
         listFragment.add(HomeFragment())    //添加HomeFragment
 
         //默认选中第一个页面
@@ -129,7 +130,7 @@ class MainActivity : AppCompatActivity() {
 // 博客代码不全，去他的gitee里看
 private fun locate() {
     //locationTv.text = ""
-    runWithPermissions(Permission.ACCESS_FINE_LOCATION) {
+    runWithPermissions(com.afollestad.assent.Permission.ACCESS_FINE_LOCATION) {
         if (LocationUtils.isLocationProviderEnabled(this@MainActivity)) {
             progressBar.visibility = View.VISIBLE
             showLocationWithToast()

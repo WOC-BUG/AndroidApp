@@ -13,6 +13,7 @@ import com.cuc.infoapp.pojo.Msg
 import com.cuc.infoapp.pojo.News
 import com.cuc.infoapp.service.Appservice
 import com.example.chatinterface.MsgAdapter
+import kotlinx.android.synthetic.main.chattingrobot_left_item.*
 import kotlinx.android.synthetic.main.chattingrobot_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -47,33 +48,42 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()//连接接口
 
-                var msg:Msg=Msg("",0)
+                //var msg:Msg=Msg("",0)
                 val appService = retrofit.create(Appservice::class.java)
                 appService.getMessageByGet("free",0,input_text.text.toString())
                     .enqueue(object : Callback<Msg> {
                         override fun onResponse(call: Call<Msg>, response: Response<Msg>) {
                             Log.d("Retrofit",response.body().toString())
 
-                            msg= response.body()!!
-//                            if(msg!=null){
-//                                leftMsg.text=msg.content//发现报错很可能是布局文件的id出了问题
-//                            }
+                           var msg= response.body()
+                          if(msg!=null){
+                             //  leftMsg.text=msg.content//发现报错很可能是布局文件的id出了问题                           }
+                            val msg4 = Msg(input_text.text.toString(),Msg.TYPE_SENT)
+                            msgList.add(msg4)//写入
+                            adapter?.notifyItemInserted(msgList.size-1) //在末尾添加item
+                            recycler_view.scrollToPosition(msgList.size-1)   //将下方的item移动到屏幕可见的最后一项
+                            input_text.setText("")
+                            val msg2=Msg(msg.content,Msg.TYPE_RECEIVED)
+                            msgList.add(msg2)
+                          }
                         }
 
                         override fun onFailure(call: Call<Msg>, t: Throwable) {
                             t.printStackTrace()
                         }
-                    })
-                val content =input_text.text.toString()
-                if(content.isNotEmpty()){
-                    val msg4 = Msg(content,Msg.TYPE_SENT)
-                    msgList.add(msg4)//写入
-                    adapter?.notifyItemInserted(msgList.size-1) //在末尾添加item
-                    recycler_view.scrollToPosition(msgList.size-1)   //将下方的item移动到屏幕可见的最后一项
-                    input_text.setText("")
-                    val msg2=Msg(msg.toString(),Msg.TYPE_RECEIVED)
-                    msgList.add(msg2)
-                }
+                    }
+
+                    )
+//                val content =input_text.text.toString()
+//                if(content.isNotEmpty()){
+//                    val msg4 = Msg(content,Msg.TYPE_SENT)
+//                    msgList.add(msg4)//写入
+//                    adapter?.notifyItemInserted(msgList.size-1) //在末尾添加item
+//                    recycler_view.scrollToPosition(msgList.size-1)   //将下方的item移动到屏幕可见的最后一项
+//                    input_text.setText("")
+//                    val msg2=Msg(msg.toString(),Msg.TYPE_RECEIVED)
+//                    msgList.add(msg2)
+//                }
             }
         }
     }
