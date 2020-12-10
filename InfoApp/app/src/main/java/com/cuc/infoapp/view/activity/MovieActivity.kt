@@ -26,7 +26,7 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
     //初始化
     private fun getMovieInfo() {
 
-        val generes:String = movie.generes
+        val genres:String = movie.genres
         val language:String = movie.language
         val release_date:String = movie.release_date.toString()
         val runtime: String = movie.runtime
@@ -35,12 +35,18 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
         //基本信息
         Glide.with(this).load(movie.poster).error(R.drawable.movie1).into(moviePoster);
         movieTitle.setText(movie.title)
-        movieType.setText("$generes/$language")
-        val info = "$runtime/$release_date$country 上映"
+        movieType.setText("$genres/$language")
+        val info = "$runtime/$release_date${country}上映"
         movieInfo.setText(info)
-        movieScore.setText(movie.rating)
-        movieIntroduction.setText(movie.plot_simple)
-        //简介
+        if(movie.rating != null)
+            movieScore.setText("${movie.rating}(${movie.rating_count}人评)")
+        else
+            movieScore.setText("暂无评分")
+        if(movie.plot_simple != null)
+            movieIntroduction.setText(movie.plot_simple)
+        else
+            movieIntroduction.setText("影片简介暂无^_^")
+        //演员列表
         actorList = movie.actors.split(',')
         //评论
         this.initComments()
@@ -62,15 +68,12 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
         //通过获得的Movie对象初始化需展示的电影信息
         this.getMovieInfo()
 
-        //this.initActors()
         val layoutManager1 = LinearLayoutManager(this)
         layoutManager1.orientation = LinearLayoutManager.HORIZONTAL  //横向展示items
         performerRecyclerView.layoutManager = layoutManager1
         actorAdapter = PerformerAdapter(actorList)
         performerRecyclerView.adapter = actorAdapter
 
-
-        //this.initComments()
         val layoutManager2 = LinearLayoutManager(this)
         commentRecyclerView.layoutManager = layoutManager2
         layoutManager2.orientation= LinearLayoutManager.VERTICAL     //纵向展示items

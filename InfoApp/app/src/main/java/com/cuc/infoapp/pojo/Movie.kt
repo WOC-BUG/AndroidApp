@@ -3,7 +3,7 @@ package com.cuc.infoapp.pojo
 import java.io.Serializable
 
 class Movie(var movieid :String, var actors :String, var also_known_as:String,var country:String, var directors:String,
-            var film_locations:String, var generes:String, var language:String, var plot_simple:String, var poster:String,
+            var film_locations:String, var genres:String, var language:String, var plot_simple:String, var poster:String,
             var rating :String, var rating_count:String, var release_date:Int, var runtime:String, var title:String,
             var type:String, var writers:String, var year:Int): Serializable {
 

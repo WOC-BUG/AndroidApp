@@ -60,6 +60,15 @@ class MovieFragment:Fragment() {
         val layoutManager= StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         itemsRecyclerView.layoutManager=layoutManager
 
+        itemsRecyclerView.adapter=MovieAdapter(getMovies(getTitleKey(), 0))  //模糊查询关键词
+
+        /*无法显示数据*/
+        //val manager = MovieHttp()
+        //itemsRecyclerView.adapter=MovieAdapter(manager.getMovies("哥斯拉"))
+    }
+
+    /*访问网络获取数据*/
+    private fun getMovies(title: String, smode: Int):List<Movie>{
         val retrofit = Retrofit.Builder()
             .baseUrl("http://v.juhe.cn/movie/")   //基址
             .addConverterFactory(GsonConverterFactory.create())
@@ -67,60 +76,32 @@ class MovieFragment:Fragment() {
 
         lateinit var back: MovieBean
         var moviesData: List<Movie> = ArrayList()
-        val moviesList=ArrayList<Movie>()
 
         val movieService = retrofit.create(MovieService::class.java)
-        movieService.getMovieData("e97579555ffaca1a38be537090e108a6","哥斯拉")
+        movieService.getMovieData("e97579555ffaca1a38be537090e108a6",title,smode)
             .enqueue(object : Callback<MovieBean> {
                 override fun onResponse(call: Call<MovieBean>, response: Response<MovieBean>) {
                     if(response.isSuccessful){
                         back = response.body()!!
                         moviesData = back.result
-                        for(i in moviesData.indices){
-                            var movie :Movie = moviesData[i]
-                            moviesList.add(movie)
-                        }
-
-                        itemsRecyclerView.adapter=MovieAdapter(moviesList)
-
-//                        if(moviesList != null){
-//                                for(i in moviesList.indices){
-//                                    Log.d("MovieHttp",moviesList[i].actors)
-//                                    Log.d("MovieHttp",moviesList[i].title)
-//                                    Log.d("MovieHttp","成功获取数据！")
-//                                    println(moviesData)
-//
-//                                }
-//
-//                        }
-
+                        //将数据放到适配器
+                        itemsRecyclerView.adapter=MovieAdapter(moviesData)
                     }
-
                 }
-
                 override fun onFailure(call: Call<MovieBean>, t: Throwable) {
                     t.printStackTrace()
                 }
             })
-
-        //itemsRecyclerView.adapter=MovieAdapter(getMovies())
-//        val manager = MovieHttp()
-//        //itemsRecyclerView.adapter=MovieAdapter(manager.getMovies("哥斯拉"))
-//        val moviesList=ArrayList<Movie>()
-//        val subjects: List<Movie> = manager.getMovies("哥斯拉")
-//        var movie: Movie
-//        for (i in subjects.indices) {
-//            movie = subjects[i]
-//            moviesList.add(movie)
-//            Log.d("MovieFragment",movie.title)
-//            Log.d("MovieFragment",movie.actors)
-//
-//            //println(moviesList[i].title)
-//            //println(moviesList[i].actors)
-//        }
-//
-//        itemsRecyclerView.adapter=MovieAdapter(moviesList)
-
+        return moviesData
+    }
+    //产生随机关键词用于获取初始电影页面数据
+    private fun getTitleKey():String{
+        var key : String = ""
+        val list = mutableListOf<String>("人鱼","行动","逃亡","我们","奇缘","历险记","少年","笔记","哥斯拉","风云","传奇","时光","归来","疯狂","伟大","游记")
+        list.shuffled().take(1).forEach{
+            key = it.toString()
+        }
+        return key
     }
 
 //    private fun getMovies():List<Movie>{
