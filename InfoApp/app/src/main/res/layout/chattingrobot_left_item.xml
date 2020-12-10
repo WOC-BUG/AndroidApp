@@ -20,8 +20,8 @@
             android:layout_height="wrap_content"
             android:textColor="#fff"
             tools:ignore="RelativeOverlap" />
-        //android:layout_gravity="center_horizontal"
-        //android:layout_margin="10dp"
+<!--        //android:layout_gravity="center_horizontal"-->
+<!--        //android:layout_margin="10dp"-->
 
 
     </LinearLayout>
@@ -29,6 +29,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/person"
-        android:id="@+id/personleft"
-        />
+        android:id="@+id/personleft" />
 </RelativeLayout>
