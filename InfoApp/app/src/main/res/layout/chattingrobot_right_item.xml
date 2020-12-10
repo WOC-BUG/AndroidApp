@@ -1,25 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp">
 
-    <LinearLayout
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:orientation="horizontal"
+android:layout_width="match_parent"
+android:layout_height="wrap_content" android:gravity="right">
+
+    <ImageView
+        android:id="@+id/personleft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:background="@drawable/message_right_original"
+        android:src="@drawable/person"
+        android:gravity="right"
+        android:layout_toRightOf="@id/imageright"/>
+    <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/message_right_original"
+    android:id="@+id/imageright"
+  >
 
-        >
         <TextView
             android:id="@+id/rightMsg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
-            android:textColor="#000" />
-    </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:textColor="#fff"
+            tools:ignore="RelativeOverlap" />
 
-</FrameLayout>
+</LinearLayout>
+
+</RelativeLayout>
+
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:orientation="vertical"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:padding="10dp">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="right"-->
+<!--        android:background="@drawable/message_right_original">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/rightMsg"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:textColor="#000" />-->
+<!--    </LinearLayout>-->
+
