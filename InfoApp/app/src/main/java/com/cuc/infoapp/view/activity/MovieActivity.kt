@@ -1,6 +1,8 @@
 package com.cuc.infoapp.view.activity
 
+import android.content.Intent
 import android.content.res.TypedArray
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,46 +14,17 @@ import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.Comment
 import com.cuc.infoapp.pojo.Movie
 import com.cuc.infoapp.view.adapter.CommentAdapter
+import com.cuc.infoapp.view.adapter.FavorateAdapter
 import com.cuc.infoapp.view.adapter.PerformerAdapter
+import com.cuc.infoapp.view.fragment.HomeFragment
 import kotlinx.android.synthetic.main.movie_basic_information.*
 import kotlinx.android.synthetic.main.movie_content.*
 
 class MovieActivity : AppCompatActivity() , View.OnClickListener{
 
-    //private var movie: Movie = Movie()
     private lateinit var movie: Movie
     private lateinit var actorList: List<String>    //演员列表
     private var commentList = ArrayList<Comment>()  //评论列表
-
-    //初始化
-    private fun getMovieInfo() {
-
-        val genres:String = movie.genres
-        val language:String = movie.language
-        val release_date:String = movie.release_date.toString()
-        val runtime: String = movie.runtime
-        var country:String = movie.country
-
-        //基本信息
-        Glide.with(this).load(movie.poster).error(R.drawable.movie1).into(moviePoster);
-        movieTitle.setText(movie.title)
-        movieType.setText("$genres/$language")
-        val info = "$runtime/$release_date${country}上映"
-        movieInfo.setText(info)
-        if(movie.rating != null)
-            movieScore.setText("${movie.rating}(${movie.rating_count}人评)")
-        else
-            movieScore.setText("暂无评分")
-        if(movie.plot_simple != null)
-            movieIntroduction.setText(movie.plot_simple)
-        else
-            movieIntroduction.setText("影片简介暂无^_^")
-        //演员列表
-        actorList = movie.actors.split(',')
-        //评论
-        this.initComments()
-    }
-
 
     private var actorAdapter : PerformerAdapter ?= null
     private var commentAdapter : CommentAdapter ?= null
@@ -61,9 +34,8 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
         setContentView(R.layout.movie_content)
 
         movie = intent.getSerializableExtra("movieItem") as Movie  //获取传递过来的Movie对象
-        //Log.d("MainActivity",movie.getPoster().toString())
 
-        Glide.with(moviePoster.context).load(movie.poster).error(R.drawable.movie1).into(moviePoster);
+        //Glide.with(moviePoster.context).load(movie.poster).error(R.drawable.movie1).into(moviePoster);
 
         //通过获得的Movie对象初始化需展示的电影信息
         this.getMovieInfo()
@@ -80,17 +52,43 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
         commentAdapter = CommentAdapter(commentList)
         commentRecyclerView.adapter = commentAdapter
         accept_comment.setOnClickListener(this)
+        checkStar.setOnClickListener(this)
     }
 
-    //初始化演员数组
-//    private fun initActors(){
-//        //从网络获取数据
-//
-//        //test
-//        for(i in 1..10){
-//            actorList.add("actor $i")
-//        }
-//    }
+
+    //初始化
+    private fun getMovieInfo() {
+
+        val genres:String = movie.genres
+        val language:String = movie.language
+        val release_date:String = movie.release_date.toString()
+        val runtime: String = movie.runtime
+        var country:String = movie.country
+
+        //基本信息
+        Glide.with(moviePoster.context).load(movie.poster).error(R.drawable.movie1).into(moviePoster);
+        movieTitle.setText(movie.title)
+        movieType.setText("$genres/$language")
+        if(movie.rating != null)
+            movieScore.setText("${movie.rating}(${movie.rating_count}人评)")
+        else
+            movieScore.setText("暂无评分")
+        if(runtime != null)
+            movieInfo.setText("$runtime/${release_date}于${country}上映")
+        else
+            movieInfo.setText("时长:暂无/${release_date}于${country}上映")
+
+        //简介
+        if(movie.plot_simple != null)
+            movieIntroduction.setText(movie.plot_simple)
+        else
+            movieIntroduction.setText("暂无影片简介^_^")
+        //演员列表
+        actorList = movie.actors.split(',')
+        //评论
+        this.initComments()
+    }
+
     //初始化评论数组
     private fun initComments() {
 
@@ -101,7 +99,7 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
 
     }
 
-    //评论 点击事件
+    //评论 与 收藏 点击事件
     override fun onClick(v: View?) {
         when (v) {
             accept_comment -> {
@@ -117,8 +115,20 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
                     comment_box.setText("")  //清空输入框
                 }
             }
+
+            checkStar -> {
+                //点击收藏时将movie对象传到HomeFragment
+
+                val favorFragment = HomeFragment()
+                val bundle= Bundle()
+                bundle.putSerializable("favourItem",movie)
+//                if(bundle != null)
+//                    println("传movie对象到Home")
+                favorFragment.arguments = bundle
+            }
         }
     }
+
     //产生随机字符串
     private fun getRandomName():String{
         var uName : String = ""

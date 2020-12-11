@@ -15,9 +15,10 @@ class Api {
     //电影接口
     var movieUrl:String="http://v.juhe.cn/movie/index" //接口地址
     var moviekey:String="72c09f5cd7dddb597ccb1bff0bdab9a9"    //APPKEY
-    var movieTitle:String=""    //申请的电影标题
+    //var movieTitle:String=getTitleKey()    //申请的电影标题
     var movieMode:Int=0    //是否精确查找，精确1，模糊0
-    var cityId:Int=0    //城市ID
+    //var getMovies:String="$movieUrl?key=$moviekey&title=$movieTitle&smode=$movieMode"
+    //var cityId:Int=0    //城市ID
 
     //天气接口
     var weatherUrl:String="http://apis.juhe.cn/simpleWeather/query" //接口地址
@@ -26,4 +27,13 @@ class Api {
     var getWeather:String = "$weatherUrl?city=$cityName&key=$weatherKey"
     //http://v.juhe.cn/weather/index?format=2&cityname=北京市&key=90fd9fc8d626f05f825f2e2f8ee5e12d
 
+//    //产生随机关键词用于获取初始电影页面数据
+//    private fun getTitleKey():String{
+//        var key : String = ""
+//        val list = mutableListOf<String>("人鱼","行动","逃亡","我们","奇缘","历险记","少年","哥斯拉","风云","传奇","时光","归来","疯狂","伟大","游记")
+//        list.shuffled().take(1).forEach{
+//            key = it.toString()
+//        }
+//        return key
+//    }
 }

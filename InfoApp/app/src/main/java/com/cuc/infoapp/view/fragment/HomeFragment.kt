@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.Movie
 import com.cuc.infoapp.view.activity.ChatActivity
+import com.cuc.infoapp.view.activity.MovieActivity
 import com.cuc.infoapp.view.adapter.FavorateAdapter
 import kotlinx.android.synthetic.main.home_main.*
 import java.util.*
@@ -47,22 +48,27 @@ class HomeFragment: Fragment() {
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.VERTICAL    //垂直排列
         favorate_movie.layoutManager = layoutManager
-        //itemsRecyclerView.adapter=NewsAdapter(dataItems)
         favorate_movie.adapter = FavorateAdapter(initMovies())
 
     }
 
     private fun initMovies():List<Movie> {//这里是要传回的数据们
-        val movie=Movie("1","Harry Potter","aaaa","England", "hhhh",
-        "America","series","English","hhjfhdasjhf","https://image.so.com/view?src=360pic_normal&z=1&i=0&cmg=15484592.4338877712468962300.1587368121393.3513&q=harry%20potter&correct=harry%20potter&ancestor=list&cmsid=6e2622a2a33ed119c8ec5ff264b76f0c&cmras=6&cn=0&gn=0&kn=28&crn=0&bxn=20&fsn=108&cuben=0&pornn=0&manun=39&adstar=0&clw=229#id=b734588af149642e98aa4a96fe3dd730&currsn=0&ps=102&pc=102",
-        "9.1","2389439",2004,"120", "哈利波特", "null","dsdsa",2020)
-//        movie.setTitle("哈利波特")
-//        movie.setLanguage("English")
-//        movie.setactors("Harry Potter")
-//        movie.setCountry("English")
-//        movie.setRating("1")
-//        movie.setType("1")
-        movieList.add(movie)
+
+        val moviedemo=Movie("2"," 克里斯汀·贝尔,伊迪娜·门泽尔,乔纳森·格罗夫,乔什·加德,圣蒂诺·方塔纳","冰雪皇后","美国", " 克里斯·巴克",
+            "America","喜剧/动画/奇幻","英语","hhjfhdasjhf","https://tu.tianzuida.com/pic/upload/vod/2019-11-22/201911221574404114.jpg",
+            "8.4","559966",2014,"102 min", "冰雪奇缘", "null","珍妮弗·李",2013)
+
+        movieList.add(moviedemo)
+
+        var bundle: Bundle? = this.arguments
+        if(bundle != null){
+            println("来自MovieActivity的数据")
+            var movie:Movie = bundle.getSerializable("favourItem") as Movie
+            movieList.add(movie)
+        }
+        println(movieList)
+
+       // favorate_movie.adapter?.notifyDataSetChanged()
         return movieList
     }
 
