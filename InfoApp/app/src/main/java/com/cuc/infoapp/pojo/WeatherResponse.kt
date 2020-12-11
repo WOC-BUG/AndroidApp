@@ -1,4 +1,4 @@
-package com.cuc.infoapp.service
+package com.cuc.infoapp.pojo
 
 //data class WeatherResponse(
 //    val error_code: Int,

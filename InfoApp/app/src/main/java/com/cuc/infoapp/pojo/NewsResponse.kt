@@ -1,4 +1,4 @@
-package com.cuc.infoapp.service
+package com.cuc.infoapp.pojo
 
 data class NewsResponse(
     var reason: String,

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cuc.infoapp.R
-import com.cuc.infoapp.service.News
+import com.cuc.infoapp.pojo.News
 import com.cuc.infoapp.view.activity.NewsActivity
 import com.cuc.infoapp.view.holder.NewsViewHolder
 import kotlinx.android.synthetic.main.item_news.view.*

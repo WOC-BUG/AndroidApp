@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.*
-import com.cuc.infoapp.service.News
-import com.cuc.infoapp.service.NewsResponse
+import com.cuc.infoapp.pojo.News
+import com.cuc.infoapp.pojo.NewsResponse
 import com.cuc.infoapp.view.adapter.NewsAdapter
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.news_or_movies.*

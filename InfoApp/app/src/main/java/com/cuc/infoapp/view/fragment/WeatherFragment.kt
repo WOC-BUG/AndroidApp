@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.Api
-import com.cuc.infoapp.service.WeatherResponse
+import com.cuc.infoapp.pojo.WeatherResponse
 import com.cuc.infoapp.view.adapter.WeatherAdapter
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.today_weather.*
