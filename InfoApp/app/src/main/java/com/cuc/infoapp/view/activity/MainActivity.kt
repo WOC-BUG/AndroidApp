@@ -154,7 +154,7 @@ private fun locate() {
             val locationResult = Utils.getAddressInfo(location)
             launch(Dispatchers.Main) {
                 locationResult?.let {
-                    locationTv.text=locationResult.result.addressComponent.city+","+locationResult.result.location.lat.toString()+","+locationResult.result.location.lng
+                    //locationTv.text=locationResult.result.addressComponent.city+","+locationResult.result.location.lat.toString()+","+locationResult.result.location.lng
                     progressBar.visibility = View.GONE
                 }
             }
