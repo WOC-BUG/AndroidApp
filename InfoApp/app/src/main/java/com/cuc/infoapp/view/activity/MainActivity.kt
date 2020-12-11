@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView:BottomNavigationView //底部导航栏
     private lateinit var viewPager:ViewPager //中间切换页面
     private lateinit var menuItem:MenuItem  //选中的按钮
-    private val pos:Position= Position(0.0,0.0,"")
     //四个页面
     private var listFragment : ArrayList<Fragment> = ArrayList()
 
@@ -47,6 +46,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //定位
+        locate()
         //初始化控件
         bottomNavigationView=findViewById(R.id.bottomNavigationView)
         viewPager=findViewById(R.id.viewPager)
@@ -65,10 +66,6 @@ class MainActivity : AppCompatActivity() {
         //设置页面适配器
         viewPager.adapter=FragmentAdapter(supportFragmentManager,listFragment)
         viewPager.offscreenPageLimit = 4
-
-        locate()
-        //Toast.makeText(this,pos.city+" "+pos.latitude +" "+pos.longitude,Toast.LENGTH_LONG).show()
-
     }
 
 
@@ -152,9 +149,10 @@ private fun locate() {
     private fun onGetLocation(location: Location) {
         GlobalScope.launch(Dispatchers.IO) {
             val locationResult = Utils.getAddressInfo(location)
+            println(locationResult)
             launch(Dispatchers.Main) {
                 locationResult?.let {
-                    //locationTv.text=locationResult.result.addressComponent.city+","+locationResult.result.location.lat.toString()+","+locationResult.result.location.lng
+                    locationTv.text=locationResult.result.addressComponent.city
                     progressBar.visibility = View.GONE
                 }
             }

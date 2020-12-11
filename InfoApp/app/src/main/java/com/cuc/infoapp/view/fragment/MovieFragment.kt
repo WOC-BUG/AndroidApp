@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout
 import com.cuc.infoapp.R
+import com.cuc.infoapp.pojo.Api
 import com.cuc.infoapp.pojo.Movie
 import com.cuc.infoapp.service.MovieBean
 //import com.cuc.infoapp.service.MovieHttp
@@ -78,7 +79,7 @@ class MovieFragment:Fragment() {
         var moviesData: List<Movie> = ArrayList()
 
         val movieService = retrofit.create(MovieService::class.java)
-        movieService.getMovieData("e97579555ffaca1a38be537090e108a6",title,smode)
+        movieService.getMovieData(Api().moviekey,title,smode)
             .enqueue(object : Callback<MovieBean> {
                 override fun onResponse(call: Call<MovieBean>, response: Response<MovieBean>) {
                     if(response.isSuccessful){
