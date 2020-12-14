@@ -22,7 +22,7 @@ class WeatherAdapter(private val futureList: List<Future>) : RecyclerView.Adapte
         val future = futureList[position]
         holder.weatherItem.futureTemperature.text=future.temperature
         holder.weatherItem.futureDate.text=future.date
-        holder.weatherItem.futureWeatherInfo.text=future.weather+" | "+future.direct//future.wind
+        holder.weatherItem.futureWeatherInfo.text=future.weather+" | "+future.direct
     }
 
     override fun getItemCount(): Int = futureList.size

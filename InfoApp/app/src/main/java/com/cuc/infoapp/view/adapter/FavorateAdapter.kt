@@ -1,5 +1,6 @@
 package com.cuc.infoapp.view.adapter
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ class FavorateAdapter(private var movieList: List<Movie>) : RecyclerView.Adapter
         return FavoriteViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         val movie=movieList[position]
        // holder.favoriteItem.moviesTitle.text=movie.getTitle()
@@ -30,25 +32,13 @@ class FavorateAdapter(private var movieList: List<Movie>) : RecyclerView.Adapter
         https://blog.csdn.net/chennai1101/article/details/103985572
          */
         Glide.with(holder.itemView.context).load(movie.poster).error(R.drawable.movie1).into(holder.favoriteItem.moviePoster);
-        holder.favoriteItem.movieTitle.setText(movie.title)
-        holder.favoriteItem.movieType.setText("${movie.genres}/${movie.language}")
-        if(movie.rating != null)
-            holder.favoriteItem.movieScore.setText("${movie.rating}(${movie.rating_count}人评)")
-        else
-            holder.favoriteItem.movieScore.setText("暂无评分")
-        if(movie.runtime != null)
-            holder.favoriteItem.movieInfo.setText("${movie.runtime}/${movie.release_date}${movie.country}上映")
-        else
-            holder.favoriteItem.movieInfo.setText("时长:暂无/${movie.release_date}于${movie.country}上映")
+        holder.favoriteItem.movieTitle.text = movie.title
+        holder.favoriteItem.movieType.text = "${movie.genres}/${movie.language}"
+        holder.favoriteItem.movieScore.text = "${movie.rating}(${movie.rating_count}人评)"
+        holder.favoriteItem.movieInfo.text = "${movie.runtime}/${movie.release_date}${movie.country}上映"
 
     }
 
     override fun getItemCount(): Int = movieList.size
-
-    //更新适配器数据
-    fun notifyDataChange(movieList: List<Movie>){
-        this.movieList = movieList
-        notifyDataSetChanged()
-    }
 
 }

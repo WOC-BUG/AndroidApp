@@ -25,9 +25,7 @@ import com.cuc.test.Callback
 import com.cuc.test.LocationUtils
 import com.cuc.test.Utils
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.item_news.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -69,7 +67,7 @@ class MainActivity : AppCompatActivity() {
 
 
     /*
-    教程：
+    页面切换教程：
     https://www.jianshu.com/p/5993e8037d4d
     https://blog.csdn.net/lllx9464/article/details/79384076
      */

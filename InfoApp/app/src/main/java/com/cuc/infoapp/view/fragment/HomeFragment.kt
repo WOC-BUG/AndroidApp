@@ -62,7 +62,7 @@ class HomeFragment: Fragment() {
 
         var bundle: Bundle? = this.arguments
         if(bundle != null){
-            println("来自MovieActivity的数据")
+            //println("来自MovieActivity的数据")
             var movie:Movie = bundle.getSerializable("favourItem") as Movie
             movieList.add(movie)
         }

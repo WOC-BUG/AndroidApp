@@ -14,10 +14,6 @@ import kotlinx.android.synthetic.main.item_news.view.*
 
 class NewsAdapter(private var newsList: List<News>) : RecyclerView.Adapter<NewsViewHolder>(){
 
-    fun notifyDataChange(list: List<News>){
-        this.newsList=list
-        notifyDataSetChanged()
-    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val view= LayoutInflater.from(parent.context).inflate(R.layout.item_news,parent,false)
         return NewsViewHolder(view)

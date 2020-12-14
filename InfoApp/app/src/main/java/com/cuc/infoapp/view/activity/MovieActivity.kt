@@ -1,5 +1,6 @@
 package com.cuc.infoapp.view.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.TypedArray
 import android.os.Build
@@ -57,6 +58,7 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
 
 
     //初始化
+    @SuppressLint("SetTextI18n")
     private fun getMovieInfo() {
 
         val genres:String = movie.genres
@@ -67,22 +69,16 @@ class MovieActivity : AppCompatActivity() , View.OnClickListener{
 
         //基本信息
         Glide.with(moviePoster.context).load(movie.poster).error(R.drawable.movie1).into(moviePoster);
-        movieTitle.setText(movie.title)
-        movieType.setText("$genres/$language")
-        if(movie.rating != null)
-            movieScore.setText("${movie.rating}(${movie.rating_count}人评)")
-        else
-            movieScore.setText("暂无评分")
-        if(runtime != null)
-            movieInfo.setText("$runtime/${release_date}于${country}上映")
-        else
-            movieInfo.setText("时长:暂无/${release_date}于${country}上映")
+        movieTitle.text = movie.title
+        movieType.text = "$genres/$language"
+        movieScore.text = "${movie.rating}(${movie.rating_count}人评)"
+        movieInfo.text = "$runtime/${release_date}于${country}上映"
 
         //简介
         if(movie.plot_simple != null)
-            movieIntroduction.setText(movie.plot_simple)
+            movieIntroduction.text = movie.plot_simple
         else
-            movieIntroduction.setText("暂无影片简介^_^")
+            movieIntroduction.text = "暂无影片简介^_^"
         //演员列表
         actorList = movie.actors.split(',')
         //评论

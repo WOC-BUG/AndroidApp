@@ -104,15 +104,4 @@ class MovieFragment:Fragment() {
         }
         return key
     }
-
-//    private fun getMovies():List<Movie>{
-//        val moviesList=ArrayList<Movie>()
-//        for(i in 1..10){
-//            val movies=Movie()
-//            movies.setTitle("This is title $i")
-//            movies.setPoster("https://tu.tianzuida.com/pic/upload/vod/2019-11-22/201911221574404114.jpg")
-//            moviesList.add(movies)
-//        }
-//        return moviesList
-//    }
 }

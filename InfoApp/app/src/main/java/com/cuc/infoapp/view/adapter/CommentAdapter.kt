@@ -12,12 +12,6 @@ import com.cuc.infoapp.view.holder.CmntViewHolder
 
 // 电影评论区适配器
 class CommentAdapter(private val commentList: List<Comment>): RecyclerView.Adapter<CmntViewHolder>() {
-    /*
-    inner class ViewHolder(view: View):RecyclerView.ViewHolder(view){
-        val userName : TextView = view.findViewById(R.id.textView)
-        val userImage : ImageView = view.findViewById(R.id.imageView)
-        val comments : TextView = view.findViewById(R.id.comments)
-    }*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):CmntViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.comment_item,parent,false)

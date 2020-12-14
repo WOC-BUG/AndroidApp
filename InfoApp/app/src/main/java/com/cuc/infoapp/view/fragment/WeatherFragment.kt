@@ -50,10 +50,10 @@ class WeatherFragment(): Fragment() {
         val weather: WeatherResponse =gson.fromJson(response,
             WeatherResponse::class.java)
         //今日天气
-        currentTemperature.text=weather.result.realtime.temperature+"°C"//weather.result.sk.temp+"°C"
-        todayTemperature.text="湿度:"+weather.result.realtime.humidity//weather.result.today.temperature
-        city.text=weather.result.city//weather.result.today.city
-        otherInfo.text=weather.result.realtime.info+" | "+weather.result.realtime.direct//weather.result.today.weather +" | "+ weather.result.today.wind
+        currentTemperature.text=weather.result.realtime.temperature+"°C"
+        todayTemperature.text="湿度:"+weather.result.realtime.humidity
+        city.text=weather.result.city
+        otherInfo.text=weather.result.realtime.info+" | "+weather.result.realtime.direct
         //未来7日天气RecyclerView
         futureWeatherRecyclerView.adapter= WeatherAdapter(weather.result.future)
     }
