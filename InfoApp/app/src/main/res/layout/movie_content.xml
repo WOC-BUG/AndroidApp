@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:maxLines="3"
             android:inputType="textMultiLine"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
         <Button
             android:id="@+id/accept_comment"
             android:layout_width="match_parent"

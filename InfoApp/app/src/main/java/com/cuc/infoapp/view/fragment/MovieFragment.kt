@@ -14,7 +14,6 @@ import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.Api
 import com.cuc.infoapp.pojo.Movie
 import com.cuc.infoapp.service.MovieBean
-//import com.cuc.infoapp.service.MovieHttp
 import com.cuc.infoapp.service.MovieService
 import com.cuc.infoapp.view.adapter.MovieAdapter
 import kotlinx.android.synthetic.main.news_or_movies.*
@@ -63,9 +62,6 @@ class MovieFragment:Fragment() {
 
         itemsRecyclerView.adapter=MovieAdapter(getMovies(getTitleKey(), 0))  //模糊查询关键词
 
-        /*无法显示数据*/
-        //val manager = MovieHttp()
-        //itemsRecyclerView.adapter=MovieAdapter(manager.getMovies("哥斯拉"))
     }
 
     /*访问网络获取数据*/
