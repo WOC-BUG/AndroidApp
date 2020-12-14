@@ -3,7 +3,7 @@ package com.cuc.infoapp.pojo
 class Api {
     //百度地图接口
     var baiduUrl:String="http://api.map.baidu.com/reverse_geocoding/v3/"
-    var baiduAK:String="QhXflRUYiQQIp7nrctBeTC1U3DVdw1lq"
+    var baiduAK:String="Uv3OZaPk4jUTE7GHPcR2uKBa26zr9CXK"
     var Sha1="BE:68:DF:FE:44:DF:C2:46:03:1C:82:27:AF:B0:B2:75:9F:D8:85:1E"
     var packageName="com.cuc.infoapp"
 
@@ -14,7 +14,7 @@ class Api {
 
     //电影接口
     var movieUrl:String="http://v.juhe.cn/movie/index" //接口地址
-    var moviekey:String="72c09f5cd7dddb597ccb1bff0bdab9a9"    //APPKEY
+    var moviekey:String="97907881a4d58d718a25b2bb72c26d72"    //APPKEY
     //var movieTitle:String=getTitleKey()    //申请的电影标题
     var movieMode:Int=0    //是否精确查找，精确1，模糊0
     //var getMovies:String="$movieUrl?key=$moviekey&title=$movieTitle&smode=$movieMode"
@@ -26,14 +26,4 @@ class Api {
     var cityName:String="北京"    //城市
     var getWeather:String = "$weatherUrl?city=$cityName&key=$weatherKey"
     //http://v.juhe.cn/weather/index?format=2&cityname=北京市&key=90fd9fc8d626f05f825f2e2f8ee5e12d
-
-//    //产生随机关键词用于获取初始电影页面数据
-//    private fun getTitleKey():String{
-//        var key : String = ""
-//        val list = mutableListOf<String>("人鱼","行动","逃亡","我们","奇缘","历险记","少年","哥斯拉","风云","传奇","时光","归来","疯狂","伟大","游记")
-//        list.shuffled().take(1).forEach{
-//            key = it.toString()
-//        }
-//        return key
-//    }
 }
