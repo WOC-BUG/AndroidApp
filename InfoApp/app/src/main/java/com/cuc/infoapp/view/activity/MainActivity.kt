@@ -16,7 +16,6 @@ import androidx.viewpager.widget.ViewPager
 import com.afollestad.assent.Permission
 import com.afollestad.assent.runWithPermissions
 import com.cuc.infoapp.R
-import com.cuc.infoapp.pojo.Position
 import com.cuc.infoapp.utils.AddressInfo
 import com.cuc.infoapp.view.fragment.HomeFragment
 import com.cuc.infoapp.view.fragment.MovieFragment
