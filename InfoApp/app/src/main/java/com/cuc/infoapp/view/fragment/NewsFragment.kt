@@ -1,6 +1,9 @@
 package com.cuc.infoapp.view.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,14 +62,19 @@ class NewsFragment:Fragment() {
         sendRequest()
     }
 
-    private fun showResponse(response: String) {
-        //println(response)
-        val gson = Gson()
-        val person: NewsResponse =gson.fromJson(response,
-            NewsResponse::class.java)
-        itemsRecyclerView.adapter=NewsAdapter(person.result.data)
+    // 更新UI
+    private val handler= @SuppressLint("HandlerLeak")
+    object :Handler(){
+        override fun handleMessage(msg: Message) {
+            val gson = Gson()
+            val person: NewsResponse =gson.fromJson(msg.data.getString("data"),NewsResponse::class.java)
+            when(msg.what){
+                1-> itemsRecyclerView.adapter=NewsAdapter(person.result.data)
+            }
+        }
     }
 
+    // 获取网络数据的子线程
     private fun sendRequest(){
         thread{
             var connection: HttpURLConnection? = null
@@ -86,7 +94,14 @@ class NewsFragment:Fragment() {
                         response.append(it)
                     }
                 }
-                showResponse(response.toString())
+
+                //通过handler发送message传参，在主线程更新UI
+                val bundle=Bundle()
+                bundle.putString("data",response.toString())
+                val msg=Message()
+                msg.what=1
+                msg.data=bundle
+                handler.sendMessage(msg)
             }catch (e:Exception){
                 e.printStackTrace()
             }finally {

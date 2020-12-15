@@ -1,22 +1,24 @@
 package com.cuc.infoapp.view.activity
 
 import FragmentAdapter
+import android.R.attr.fragment
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.location.Location
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
-import android.Manifest.permission.ACCESS_FINE_LOCATION
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager.widget.ViewPager
 import com.afollestad.assent.Permission
 import com.afollestad.assent.runWithPermissions
 import com.cuc.infoapp.R
-import com.cuc.infoapp.utils.AddressInfo
+import com.cuc.infoapp.pojo.Api
 import com.cuc.infoapp.view.fragment.HomeFragment
 import com.cuc.infoapp.view.fragment.MovieFragment
 import com.cuc.infoapp.view.fragment.NewsFragment
@@ -33,28 +35,31 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
+    val fragmentManager: FragmentManager = supportFragmentManager
+    val fragmentTransaction: FragmentTransaction =
+        fragmentManager.beginTransaction()
     private lateinit var bottomNavigationView:BottomNavigationView //底部导航栏
     private lateinit var viewPager:ViewPager //中间切换页面
     private lateinit var menuItem:MenuItem  //选中的按钮
+    var api:Api=Api()
+    var weatherFragment=WeatherFragment(api)
     //四个页面
     private var listFragment : ArrayList<Fragment> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        //定位
-        locate()
         //初始化控件
         bottomNavigationView=findViewById(R.id.bottomNavigationView)
         viewPager=findViewById(R.id.viewPager)
         listFragment.add(NewsFragment())    //添加新闻Fragment
         listFragment.add(MovieFragment())    //添加视频Fragment
-        listFragment.add(WeatherFragment())    //添加天气Fragment
+        listFragment.add(weatherFragment)    //添加天气Fragment
         listFragment.add(HomeFragment())    //添加HomeFragment
 
         //默认选中第一个页面
         bottomNavigationView.menu.getItem(0).isChecked = true;
+
 
         //设置监听器
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationSelectedListener)
@@ -63,6 +68,8 @@ class MainActivity : AppCompatActivity() {
         //设置页面适配器
         viewPager.adapter=FragmentAdapter(supportFragmentManager,listFragment)
         viewPager.offscreenPageLimit = 4
+        //定位
+        locate()
     }
 
 
@@ -118,21 +125,32 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-// GPS定位
-// 源码：  https://blog.csdn.net/yinxing2008/article/details/85695163
-// 博客代码不全，去他的gitee里看
-private fun locate() {
-    //locationTv.text = ""
-    runWithPermissions(com.afollestad.assent.Permission.ACCESS_FINE_LOCATION) {
-        if (LocationUtils.isLocationProviderEnabled(this@MainActivity)) {
-            progressBar.visibility = View.VISIBLE
-            showLocationWithToast()
-        } else {
-            Utils.showAlert("本应用需要获取地理位置，请打开获取位置的开关", this)
+    // GPS定位
+    // 更新UI
+    private val handler= @SuppressLint("HandlerLeak")
+    object :Handler(){
+        override fun handleMessage(msg: Message) {
+            when(msg.what){
+                1-> {
+                    api.cityName= msg.data.getString("cityName").toString()
+                    locationTv.text=api.cityName
+                }
+            }
         }
     }
-}
+
+    // 源码：  https://blog.csdn.net/yinxing2008/article/details/85695163
+    // 博客代码不全，去他的gitee里看
+    private fun locate() {
+        runWithPermissions(Permission.ACCESS_FINE_LOCATION) {
+            if (LocationUtils.isLocationProviderEnabled(this@MainActivity)) {
+                progressBar.visibility = View.VISIBLE
+                showLocationWithToast()
+            } else {
+                Utils.showAlert("本应用需要获取地理位置，请打开获取位置的开关", this)
+            }
+        }
+    }
 
     private fun showLocationWithToast() {
         LocationUtils.getLocation(this@MainActivity, object : Callback {
@@ -142,14 +160,23 @@ private fun locate() {
         })
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "ResourceType")
     private fun onGetLocation(location: Location) {
         GlobalScope.launch(Dispatchers.IO) {
             val locationResult = Utils.getAddressInfo(location)
             println(locationResult)
             launch(Dispatchers.Main) {
                 locationResult?.let {
-                    locationTv.text=locationResult.result.addressComponent.city
+                    //通过handler发送message传参，在主线程更新UI、在WeatherFragment传递城市名
+                    val bundle=Bundle()
+                    bundle.putString("cityName",locationResult.result.addressComponent.city)
+//                    //给天气页面更新数据
+//                    weatherFragment.arguments=bundle
+                    //给主页面UI传参
+                    val msg=Message()
+                    msg.what=1
+                    msg.data=bundle
+                    handler.sendMessage(msg)
                     progressBar.visibility = View.GONE
                 }
             }

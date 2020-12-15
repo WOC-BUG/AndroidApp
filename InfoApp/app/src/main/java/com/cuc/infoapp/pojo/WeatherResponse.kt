@@ -65,7 +65,7 @@ data class WeatherResponse(
 )
 
 data class WeatherResult(
-    val city: String,
+    var city: String,
     val future: List<Future>,
     val realtime: Realtime
 )
