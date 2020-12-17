@@ -166,18 +166,21 @@ class MainActivity : AppCompatActivity() {
             val locationResult = Utils.getAddressInfo(location)
             println(locationResult)
             launch(Dispatchers.Main) {
-                locationResult?.let {
-                    //通过handler发送message传参，在主线程更新UI、在WeatherFragment传递城市名
-                    val bundle=Bundle()
-                    bundle.putString("cityName",locationResult.result.addressComponent.city)
-//                    //给天气页面更新数据
-//                    weatherFragment.arguments=bundle
-                    //给主页面UI传参
-                    val msg=Message()
-                    msg.what=1
-                    msg.data=bundle
-                    handler.sendMessage(msg)
-                    progressBar.visibility = View.GONE
+                if(locationResult?.result!=null)
+                {
+                    locationResult?.let {
+                        //通过handler发送message传参，在主线程更新UI、在WeatherFragment传递城市名
+                            val bundle=Bundle()
+                            bundle.putString("cityName",locationResult.result.addressComponent.city)
+    //                    //给天气页面更新数据
+    //                    weatherFragment.arguments=bundle
+                            //给主页面UI传参
+                            val msg=Message()
+                            msg.what=1
+                            msg.data=bundle
+                            handler.sendMessage(msg)
+                        progressBar.visibility = View.GONE
+                    }
                 }
             }
         }

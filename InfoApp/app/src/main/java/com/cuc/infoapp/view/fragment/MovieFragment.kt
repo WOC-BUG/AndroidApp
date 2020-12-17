@@ -82,7 +82,10 @@ class MovieFragment:Fragment() {
                         back = response.body()!!
                         moviesData = back.result
                         //将数据放到适配器
-                        itemsRecyclerView.adapter=MovieAdapter(moviesData)
+                        if (moviesData!=null)
+                        {
+                            itemsRecyclerView.adapter=MovieAdapter(moviesData)
+                        }
                     }
                 }
                 override fun onFailure(call: Call<MovieBean>, t: Throwable) {

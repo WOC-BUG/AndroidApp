@@ -47,16 +47,19 @@ class WeatherFragment(private var api:Api): Fragment() {
         override fun handleMessage(msg: Message) {
             val gson = Gson()
             val weather: WeatherResponse =gson.fromJson(msg.data.getString("data"),WeatherResponse::class.java)
-            when(msg.what){
-                1-> {
-                    println("weather update")
-                    //今日天气
-                    currentTemperature.text=weather.result.realtime.temperature+"°C"
-                    todayTemperature.text="湿度:"+weather.result.realtime.humidity
-                    city.text=weather.result.city
-                    otherInfo.text=weather.result.realtime.info+" | "+weather.result.realtime.direct
-                    //未来7日天气RecyclerView
-                    futureWeatherRecyclerView.adapter= WeatherAdapter(weather.result.future)
+            if(weather.result!=null) {
+                when (msg.what) {
+                    1 -> {
+                        println("weather update")
+                        //今日天气
+                        currentTemperature.text = weather.result.realtime.temperature + "°C"
+                        todayTemperature.text = "湿度:" + weather.result.realtime.humidity
+                        city.text = weather.result.city
+                        otherInfo.text =
+                            weather.result.realtime.info + " | " + weather.result.realtime.direct
+                        //未来7日天气RecyclerView
+                        futureWeatherRecyclerView.adapter = WeatherAdapter(weather.result.future)
+                    }
                 }
             }
         }

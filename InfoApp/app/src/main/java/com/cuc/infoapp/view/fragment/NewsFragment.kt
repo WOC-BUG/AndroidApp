@@ -63,10 +63,13 @@ class NewsFragment:Fragment() {
     object :Handler(){
         override fun handleMessage(msg: Message) {
             val gson = Gson()
-            val person: NewsResponse =gson.fromJson(msg.data.getString("data"),NewsResponse::class.java)
-            when(msg.what){
-                1-> itemsRecyclerView.adapter=NewsAdapter(person.result.data)
+            val news: NewsResponse =gson.fromJson(msg.data.getString("data"),NewsResponse::class.java)
+            if(news.result!=null)
+            {
+                when(msg.what){
+                    1-> itemsRecyclerView.adapter=NewsAdapter(news.result.data)
             }
+        }
         }
     }
 }

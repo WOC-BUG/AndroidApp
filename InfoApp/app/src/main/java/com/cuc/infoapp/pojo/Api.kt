@@ -3,7 +3,7 @@ package com.cuc.infoapp.pojo
 class Api {
     //百度地图接口
     var baiduUrl:String="http://api.map.baidu.com/reverse_geocoding/v3/"
-    var baiduAK:String="5rQs9PLIVnWGxoepRBtFfFF63FE41jUS"
+    var baiduAK:String="uBE3iRti00quaSi1T36sznL0qvrKGmPo"
     var Sha1="BE:68:DF:FE:44:DF:C2:46:03:1C:82:27:AF:B0:B2:75:9F:D8:85:1E"
     var packageName="com.cuc.infoapp"
 
