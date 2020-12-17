@@ -13,16 +13,11 @@ import com.cuc.infoapp.R
 import com.cuc.infoapp.pojo.*
 import com.cuc.infoapp.pojo.News
 import com.cuc.infoapp.pojo.NewsResponse
+import com.cuc.infoapp.service.SendRequest
 import com.cuc.infoapp.view.adapter.NewsAdapter
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.news_or_movies.*
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.lang.StringBuilder
-import java.net.HttpURLConnection
-import java.net.URL
 import kotlin.collections.ArrayList
-import kotlin.concurrent.thread
 
 
 class NewsFragment:Fragment() {
@@ -59,7 +54,8 @@ class NewsFragment:Fragment() {
         val layoutManager= LinearLayoutManager(context)
         layoutManager.orientation=LinearLayoutManager.VERTICAL    //垂直排列
         itemsRecyclerView.layoutManager=layoutManager
-        sendRequest()
+        //发送请求获取数据
+        SendRequest().sendRequest(Api().getNews,handler)
     }
 
     // 更新UI
@@ -70,42 +66,6 @@ class NewsFragment:Fragment() {
             val person: NewsResponse =gson.fromJson(msg.data.getString("data"),NewsResponse::class.java)
             when(msg.what){
                 1-> itemsRecyclerView.adapter=NewsAdapter(person.result.data)
-            }
-        }
-    }
-
-    // 获取网络数据的子线程
-    private fun sendRequest(){
-        thread{
-            var connection: HttpURLConnection? = null
-            try{
-                val response = StringBuilder()
-                val url= URL(Api().getNews)
-                connection = url.openConnection() as HttpURLConnection  //连接
-                connection.requestMethod = "GET";
-                connection.connectTimeout = 8000
-                connection.readTimeout = 8000
-                val input = connection.inputStream //获取输入流
-
-                //对获取到的输入流进行读取
-                val reader = BufferedReader (InputStreamReader(input))
-                reader.use {
-                    reader.forEachLine {
-                        response.append(it)
-                    }
-                }
-
-                //通过handler发送message传参，在主线程更新UI
-                val bundle=Bundle()
-                bundle.putString("data",response.toString())
-                val msg=Message()
-                msg.what=1
-                msg.data=bundle
-                handler.sendMessage(msg)
-            }catch (e:Exception){
-                e.printStackTrace()
-            }finally {
-                connection?.disconnect()
             }
         }
     }
