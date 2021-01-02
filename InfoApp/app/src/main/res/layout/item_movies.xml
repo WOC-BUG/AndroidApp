@@ -26,6 +26,6 @@
         android:singleLine="true"
         android:text="我是电影TitleTitle"
         android:textColor="@android:color/white"
-        android:textSize="20sp" />
+        style="@style/BodyTitle" />
 
 </FrameLayout>

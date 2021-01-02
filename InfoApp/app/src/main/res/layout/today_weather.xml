@@ -1,60 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/todayWeather"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
+    android:layout_height="wrap_content"
     android:gravity="center"
-    android:layout_margin="5dp"
-    android:background="#95FFFFFF"
-    android:orientation="vertical">
+    android:layout_margin="10dp"
+    android:orientation="horizontal"
+    android:baselineAligned="false">
 
     <LinearLayout
-        android:id="@+id/todayWeather"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_margin="10dp">
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/currentTemperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="60sp"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="@string/_0_c"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:gravity="center">
             <TextView
-                android:id="@+id/currentTemperature"
+                android:id="@+id/city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="40sp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_weight="2"
-                android:text="0°C"/>
-            <TextView
-                android:id="@+id/todayTemperature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:layout_margin="20dp"
-                android:textSize="20sp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:layout_weight="1"/>
+                android:text="@string/city"
+                android:layout_marginRight="4dp"
+                android:textColor="#FFFFFF"
+                android:layout_marginEnd="4dp" />
+
+            <ImageButton
+                android:id="@+id/pos"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/pos" />
         </LinearLayout>
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1">
         <TextView
-            android:id="@+id/city"
+            android:id="@+id/todayTemperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="City"
-            android:layout_weight="1"
+            android:text="@string/wet"
+            android:textColor="#FFFFFF"
             android:layout_gravity="center"
             android:gravity="center"/>
         <TextView
@@ -62,10 +66,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="otherInfo"
-            android:layout_weight="1"/>
-
+            android:text="@string/otherinfo"
+            android:textColor="#FFFFFF"/>
     </LinearLayout>
 
-    </LinearLayout>
 </LinearLayout>

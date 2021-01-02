@@ -6,8 +6,28 @@
         <item name="colorAccent">#156183</item>
     </style>
 
+    <!--  标题文字大小  -->
+    <style name="BodyTitle">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!--  辅助说明文字大小  -->
+    <style name="Explanation">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <!--  小字大小  -->
+    <style name="LittleText">
+        <item name="android:textSize">20px</item>
+    </style>
+
+    <!--  头像名大小  -->
+    <style name="AvatarName">
+        <item name="android:textSize">28px</item>
+    </style>
+
     <style name="TextStyle">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
 

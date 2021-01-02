@@ -35,9 +35,6 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-    val fragmentManager: FragmentManager = supportFragmentManager
-    val fragmentTransaction: FragmentTransaction =
-        fragmentManager.beginTransaction()
     private lateinit var bottomNavigationView:BottomNavigationView //底部导航栏
     private lateinit var viewPager:ViewPager //中间切换页面
     private lateinit var menuItem:MenuItem  //选中的按钮

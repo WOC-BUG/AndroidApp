@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.weather_content.*
 
 
 class WeatherFragment(private var api:Api): Fragment() {
-    var thread= Thread()
     // 创建Fragment的布局
     override fun onCreateView(
         inflater: LayoutInflater,

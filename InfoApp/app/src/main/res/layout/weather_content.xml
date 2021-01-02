@@ -4,29 +4,22 @@
     android:id="@+id/weather"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C1D9EC"
+    android:background="@drawable/winter"
     android:orientation="vertical">
-<!--    &lt;!&ndash;   定位图标   &ndash;&gt;-->
-<!--    <ImageButton-->
-<!--        android:id="@+id/locate"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@drawable/movie"-->
-<!--        android:onClick="onClick"/>-->
+
     <!--  今日天气  -->
     <include layout="@layout/today_weather"/>
 
-<!--    <View-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="2dp"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:background="#535353"/>-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="10dp"
+        android:background="#80FFFFFF"/>
 
-    <!--  未来7天天气  -->
+    <!--  未来5天天气  -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/futureWeatherRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"/>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

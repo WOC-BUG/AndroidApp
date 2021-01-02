@@ -16,15 +16,15 @@
         <EditText
             android:id="@+id/search_box"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:background="@drawable/edit_bg" />
 
         <Button
             android:id="@+id/accept_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
             android:text="@string/search"
             android:background="@drawable/button"
             style="@style/TextStyle"/>
