@@ -14,7 +14,7 @@ class Api {
 
     //电影接口
     var movieUrl:String="http://v.juhe.cn/movie/index" //接口地址
-    var moviekey:String="51ed3502a863d1cf881c4f988e918dcb"    //APPKEY
+    var moviekey:String="05bcbd2d51d9fb1ae9c2dae6761606e2"    //APPKEY
     //var movieTitle:String=getTitleKey()    //申请的电影标题
     var movieMode:Int=0    //是否精确查找，精确1，模糊0
     //var getMovies:String="$movieUrl?key=$moviekey&title=$movieTitle&smode=$movieMode"
